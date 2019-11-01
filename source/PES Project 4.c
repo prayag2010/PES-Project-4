@@ -68,7 +68,8 @@ int main(void) {
     printf("normal\n");
 #endif
 
-    log_string(__func__);
+    log_message(__func__, "Hello");
+
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */

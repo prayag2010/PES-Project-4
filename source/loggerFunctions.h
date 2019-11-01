@@ -85,4 +85,7 @@ void log_string(char *inString);
  */
 void log_integer(uint32_t *inAddress);
 
+void log_message(const char *functionName, char *message);
+
+
 #endif /* LOGGERFUNCTIONS_H_ */

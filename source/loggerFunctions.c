@@ -47,6 +47,26 @@ void log_data(uint32_t *inAddress, size_t length)
 	}
 }
 
+void log_message(const char *functionName, char *message)
+{
+	if(loggerEnable){
+#ifdef debug
+		printf("DEBUG: ");
+#endif
+
+#ifdef test
+		printf("TEST: ");
+#endif
+
+#ifdef normal
+		printf("NORMAL: ");
+#endif
+
+		printf("%s: %s", functionName, message);
+
+	}
+}
+
 
 void log_string(char *inString)
 {
