@@ -38,6 +38,7 @@ uint16_t read_temp()
 {
 	uint8_t MSB = 0, LSB = 0;
 	uint16_t temp_read = 0;
+	int16_t twos_complement;
 
 	RESTART;
 	DATA(0x90);   //Transmit first byte
@@ -64,6 +65,8 @@ uint16_t read_temp()
 	STOP;
 	LSB = I2C1->D;
 
+	if( LSB == 0xFF )
+		return 0xFFFF;
 	if((MSB & 0x80) == 0)
 	{
 		temp_read = (MSB << 4) | ((LSB >> 4) & 0x0F);
@@ -72,13 +75,16 @@ uint16_t read_temp()
 	}
 	else
 	{
-		uint16_t twos_complement = (MSB << 4) | ((LSB >> 4) & 0x0F);
+		twos_complement = (MSB << 4) | ((LSB >> 4) & 0x0F);
 		printf("%x\n", twos_complement);
 		temp_read = ((~twos_complement) & 0x0FF)  +1;
 		printf("%x\n", temp_read);
 		printf("The temperature is : -%d\n", (temp_read)/16);
 	}
-	return temp_read;
+	if( twos_complement < (-45) || temp_read >125)
+		return 0xFFFF;
+	else
+		return temp_read;
 }
 
 void disconnect()
