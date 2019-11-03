@@ -1,2 +1,4 @@
-PES Project 4.c:51:5:main	8	static
-PES Project 4.c:92:6:PORTD_IRQHandler	8	static
+PES Project 4.c:52:6:Init_SysTick	0	static
+PES Project 4.c:62:5:main	8	static
+PES Project 4.c:106:6:PORTD_IRQHandler	8	static
+PES Project 4.c:112:6:SysTick_Handler	8	static

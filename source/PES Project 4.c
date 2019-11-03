@@ -27,14 +27,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 /**
  * @file    PES Project 4.c
  * @brief   Application entry point.
  */
 #include <stdio.h>
 #include "board.h"
-#include "peripherals.h"
+//#include "peripherals.h"
 #include "pin_mux.h"
 #include "clock_config.h"
 #include "MKL25Z4.h"
@@ -47,50 +47,72 @@
  * @brief   Application entry point.
  */
 
+volatile int i = 0;
+
+void Init_SysTick(void)
+{
+	SysTick->LOAD = (42915344L);
+	NVIC_SetPriority(SysTick_IRQn, 3);
+	SysTick->VAL = 0;
+	SysTick->CTRL = SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
+}
+
 bool loggerEnable = true;
+
 int main(void) {
-  	/* Init board hardware. */
-    BOARD_InitBootPins();
-    BOARD_InitBootClocks();
-    BOARD_InitBootPeripherals();
+	/* Init board hardware. */
+//	BOARD_InitBootPins();
+//	BOARD_InitBootClocks();
+//	BOARD_InitBootPeripherals();
 
-    SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
+	SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
 
-    PORTD->PCR[1] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_MUX(1) | \
-    		PORT_PCR_IRQC(0x08);
+	PORTD->PCR[1] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_MUX(1) | \
+			PORT_PCR_IRQC(0x08);
 
-    NVIC->ISER[0] |= (1 << PORTD_IRQn);
+	NVIC->ISER[0] |= (1 << PORTD_IRQn);
 
-    printf("Hello World\n");
+	printf("Hello World\n");
+	Init_SysTick();
+	printf("START\n");
 
 #ifdef debug
-    printf("DEBUG\n");
+	printf("DEBUG\n");
 #endif
 
 #ifdef test
-    printf("test\n");
+	printf("test\n");
 #endif
 
 #ifdef normal
-    printf("normal\n");
+	printf("normal\n");
 #endif
 
-    log_message(__func__, "Hello");
+	log_message(__func__, "Hello");
 
-    /* Force the counter to be placed into memory. */
-    volatile static int i = 0 ;
-    /* Enter an infinite loop, just incrementing a counter. */
-    while(1) {
-        i++ ;
-        /* 'Dummy' NOP to allow source level single stepping of
+	/* Force the counter to be placed into memory. */
+	volatile static int i = 0 ;
+	/* Enter an infinite loop, just incrementing a counter. */
+	while(1) {
+		i++ ;
+		/* 'Dummy' NOP to allow source level single stepping of
             tight while() loop */
-        __asm volatile ("nop");
-    }
-    return 0 ;
+		__asm volatile ("nop");
+	}
+	return 0 ;
+
 }
 
 void PORTD_IRQHandler(void)
 {
 	PORTD->PCR[1] |= PORT_PCR_ISF_MASK;
 	printf("INTERRUPT!\n");
+}
+
+void SysTick_Handler(void)  {                               /* SysTick interrupt Handler. */
+	i++;                                      /* See startup file startup_LPC17xx.s for SysTick vector */
+	if(i > 1){
+		i = 0;
+		printf("SYSTICK\n");
+	}
 }

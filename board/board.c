@@ -1,6 +1,6 @@
 /*
- * Copyright 2016-2019 NXP
- * All rights reserved.
+ * Copyright (c) 2015, Freescale Semiconductor, Inc.
+ * Copyright 2016-2017 NXP
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -12,7 +12,7 @@
  *   list of conditions and the following disclaimer in the documentation and/or
  *   other materials provided with the distribution.
  *
- * o Neither the name of NXP Semiconductor, Inc. nor the names of its
+ * o Neither the name of the copyright holder nor the names of its
  *   contributors may be used to endorse or promote products derived from this
  *   software without specific prior written permission.
  *
@@ -28,19 +28,30 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
- * @file    board.c
- * @brief   Board initialization file.
- */
- 
-/* This is a template for board specific configuration created by MCUXpresso IDE Project Wizard.*/
-
 #include <stdint.h>
 #include "board.h"
+#include "../utilities/fsl_debug_console.h"
+#include "../drivers/fsl_common.h"
 
-/**
- * @brief Set up and initialize all required blocks and functions related to the board hardware.
- */
-void BOARD_InitDebugConsole(void) {
-	/* The user initialization should be placed here */
+/*******************************************************************************
+ * Variables
+ ******************************************************************************/
+
+/*******************************************************************************
+ * Code
+ ******************************************************************************/
+/* Initialize debug console. */
+void BOARD_InitDebugConsole(void)
+{
+    uint32_t uartClkSrcFreq;
+    /* SIM_SOPT2[27:26]:
+     *  00: Clock Disabled
+     *  01: IRC48M
+     *  10: OSCERCLK
+     *  11: MCGIRCCLK
+     */
+    CLOCK_SetLpsci0Clock(1);
+
+    uartClkSrcFreq = BOARD_DEBUG_UART_CLK_FREQ;
+    DbgConsole_Init(BOARD_DEBUG_UART_BASEADDR, BOARD_DEBUG_UART_BAUDRATE, BOARD_DEBUG_UART_TYPE, uartClkSrcFreq);
 }
