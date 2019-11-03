@@ -17,6 +17,11 @@ int main(void)
 {
 	BOARD_InitDebugConsole();
 
+//	__enable_irq();
+//
+//	NVIC->ICPR[0] |= 1 << I2C1_IRQn;
+//    NVIC->ISER[0] |= 1 << I2C1_IRQn;
+
 	i2c_master_init();
 
 	read_temp();
@@ -25,20 +30,16 @@ int main(void)
 //	i2c_master_init();
 //	read_temp();
 
-//	__enable_irq();
-//
-//	NVIC->ICPR[0] |= 1 << I2C1_IRQn;
-//    NVIC->ISER[0] |= 1 << I2C1_IRQn;
-
-
 	return 0 ;
 }
 
 void I2C1_IRQHandler (void)
 {
-	if((I2C1->S & I2C_S_RXAK_MASK) == 0)           //Check if slave received a byte
-	{
-		printf("Slave detected\n");
-		I2C1->S |= I2C_S_RXAK_MASK;
-	}
+//	printf("Entered Interrupt\n");
+//	if((I2C1->S & I2C_S_RXAK_MASK) == 0)           //Check if slave received a byte
+//	{
+//		printf("Slave detected\n");
+//		I2C1->S |= I2C_S_RXAK_MASK;
+//	}
+//	I2C1->S |= I2C_S_IICIF_MASK;
 }
