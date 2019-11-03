@@ -54,6 +54,13 @@ int main(void) {
     BOARD_InitBootClocks();
     BOARD_InitBootPeripherals();
 
+    SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
+
+    PORTD->PCR[1] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_MUX(1) | \
+    		PORT_PCR_IRQC(0x08);
+
+    NVIC->ISER[0] |= (1 << PORTD_IRQn);
+
     printf("Hello World\n");
 
 #ifdef debug
@@ -80,4 +87,10 @@ int main(void) {
         __asm volatile ("nop");
     }
     return 0 ;
+}
+
+void PORTD_IRQHandler(void)
+{
+	PORTD->PCR[1] |= PORT_PCR_ISF_MASK;
+	printf("INTERRUPT!\n");
 }

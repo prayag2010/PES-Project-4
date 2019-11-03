@@ -13,7 +13,7 @@
 
 #include "i2c.h"
 
-int main(void)
+int mainmkk(void)
 {
 	BOARD_InitDebugConsole();
 	i2c_master_init();
