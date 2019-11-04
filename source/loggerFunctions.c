@@ -62,7 +62,7 @@ void log_message(const char *functionName, char *message)
 		printf("NORMAL: ");
 #endif
 
-		printf("%s: %s", functionName, message);
+		printf("%s: %s\n", functionName, message);
 
 	}
 }
