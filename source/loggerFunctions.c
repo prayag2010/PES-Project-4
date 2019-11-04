@@ -47,22 +47,42 @@ void log_data(uint32_t *inAddress, size_t length)
 	}
 }
 
-void log_message(const char *functionName, char *message)
+void log_message(int logLevel, const char *functionName, char *message)
 {
 	if(loggerEnable){
 #ifdef debug
-		printf("DEBUG: ");
+		if(logLevel == 0){
+			printf("DEBUG: ");
+			printf("%s: %s\n", functionName, message);
+		}
 #endif
 
 #ifdef test
-		printf("TEST: ");
+		if (logLevel == 1){
+			printf("TEST: ");
+			printf("%s: %s\n", functionName, message);
+		}
 #endif
 
 #ifdef normal
-		printf("NORMAL: ");
+		if (logLevel == 2){
+			printf("NORMAL: ");
+			printf("%s: %s\n", functionName, message);
+		}
 #endif
-
-		printf("%s: %s\n", functionName, message);
+		//
+		//		if(logLevel == 0){
+		//			printf("DEBUG: ");
+		//			printf("%s: %s\n", functionName, message);
+		//		}
+		//		else if (logLevel == 1){
+		//			printf("TEST: ");
+		//			printf("%s: %s\n", functionName, message);
+		//		}
+		//		else if (logLevel == 2){
+		//			printf("NORMAL: ");
+		//			printf("%s: %s\n", functionName, message);
+		//		}
 
 	}
 }

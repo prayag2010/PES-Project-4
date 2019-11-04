@@ -105,7 +105,7 @@ Discarded input sections
  .text.log_status
                 0x0000000000000000        0xc ./source/loggerFunctions.o
  .text.log_message
-                0x0000000000000000       0x2c ./source/loggerFunctions.o
+                0x0000000000000000       0x30 ./source/loggerFunctions.o
  .text.log_string
                 0x0000000000000000       0x1c ./source/loggerFunctions.o
  .text.log_integer
@@ -120,14 +120,14 @@ Discarded input sections
                 0x0000000000000000       0x11 ./source/loggerFunctions.o
  .rodata.log_string.str1.1
                 0x0000000000000000        0x4 ./source/loggerFunctions.o
- .debug_info    0x0000000000000000      0x402 ./source/loggerFunctions.o
+ .debug_info    0x0000000000000000      0x416 ./source/loggerFunctions.o
  .debug_abbrev  0x0000000000000000      0x1bc ./source/loggerFunctions.o
- .debug_loc     0x0000000000000000      0x12a ./source/loggerFunctions.o
+ .debug_loc     0x0000000000000000      0x14f ./source/loggerFunctions.o
  .debug_aranges
                 0x0000000000000000       0x50 ./source/loggerFunctions.o
  .debug_ranges  0x0000000000000000       0x58 ./source/loggerFunctions.o
- .debug_line    0x0000000000000000      0x2a2 ./source/loggerFunctions.o
- .debug_str     0x0000000000000000      0x350 ./source/loggerFunctions.o
+ .debug_line    0x0000000000000000      0x2ac ./source/loggerFunctions.o
+ .debug_str     0x0000000000000000      0x359 ./source/loggerFunctions.o
  .comment       0x0000000000000000       0x76 ./source/loggerFunctions.o
  .debug_frame   0x0000000000000000       0xa8 ./source/loggerFunctions.o
  .ARM.attributes
