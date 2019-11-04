@@ -153,10 +153,13 @@ uint16_t read_temp()
 		printf("%x\n", temp_read);
 		printf("The temperature is : -%d\n", (temp_read)/16);
 	}
-	if( twos_complement < (-45) || temp_read >125)
+
+	if( twos_complement < (-45) || (temp_read/16) > 125){
+		printf("Error in reading temp, function %s", __func__);
 		return 0xFFFF;
+	}
 	else
-		return temp_read;
+		return (temp_read/16);
 }
 
 void disconnect()

@@ -12,6 +12,10 @@
 
 volatile int i = 0;
 
+int average = 0;
+int tempSum = 0;
+uint16_t tempR = 0;
+
 bool loggerEnable = true;
 volatile bool delayCompleted = false;
 volatile bool alertAddressed = true;
@@ -28,8 +32,8 @@ enum eventCodes tempReadState(void)
 //	initPortD();
 	smallDelay();
 	i2c_master_init();
-	read_temp();
-	printf("tempReadState\n");
+	tempR = read_temp();
+	printf("tempReadState %d\n", tempR);
 	return alertEvent;
 }
 
@@ -47,12 +51,19 @@ enum eventCodes avgWaitState(void)
 	resetSysTick();
 	startSysTick();
 
+	tempSum += (int)tempR;
+	average = tempSum / (timeoutCounter + 1);
+	printf("Average: %d\n", average);
+
 	while(!delayCompleted);
 	printf("avgWaitState\n");
 	timeoutCounter++;
 	printf("Counter: %d\n", timeoutCounter);
 
+
 	if (timeoutCounter >= 3) {
+		tempSum = 0;
+		average = 0;
 		printf("Switched to a different state\n");
 		timeoutCounter = 0;
 		currentState = tempRead;
