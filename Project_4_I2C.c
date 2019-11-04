@@ -13,7 +13,7 @@
 
 #include "i2c.h"
 
-int main(void)
+int mainNOTreally(void)
 {
 	BOARD_InitDebugConsole();
 

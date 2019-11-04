@@ -29,6 +29,5 @@ void i2c_master_init();
 
 uint16_t read_temp();
 
-void disconnect();
 
 #endif /* I2C_H_ */

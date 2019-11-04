@@ -7,64 +7,86 @@
 #include "MKL25Z4.h"
 #include "loggerFunctions.h"
 #include "PESProject4.h"
+#include "i2c.h"
 
 
 volatile int i = 0;
 
 bool loggerEnable = true;
 volatile bool delayCompleted = false;
+volatile bool alertAddressed = true;
+
+void smallDelay(void)
+{
+	for(int i = 0; i < 10000; i++);
+}
 
 enum eventCodes tempReadState(void)
 {
-    printf("tempReadState\n");
-    return alertEvent;
+	PORTD->PCR[5] |= PORT_PCR_ISF_MASK;
+	PORTD->PCR[5] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_MUX(1) | \
+				PORT_PCR_IRQC(0x8);
+//	initPortD();
+	smallDelay();
+	i2c_master_init();
+	read_temp();
+	printf("tempReadState\n");
+	return alertEvent;
 }
 
 enum eventCodes tempAlertState(void)
 {
-    printf("tempAlertState\n");
-    return completeEvent;
+	NVIC->ICER[0] |= (1 << PORTD_IRQn);
+	printf("tempAlertState\n");
+	return completeEvent;
 }
 
 enum eventCodes avgWaitState(void)
 {
+	printf("Entered avgWaitState, disabling IRQ\n");
+	NVIC->ICER[0] |= (1 << PORTD_IRQn);
 	resetSysTick();
 	startSysTick();
 
 	while(!delayCompleted);
-    printf("avgWaitState\n");
-    timeoutCounter++;
-    printf("Counter: %d\n", timeoutCounter);
-    if (timeoutCounter >= 3) {
-        printf("Switched to a different state\n");
-        timeoutCounter = 0;
-        currentState = tempRead;
-        stateTableActivated = !stateTableActivated;
-        return errorEvent;
-    }
-    else
-        return timeoutEvent;
+	printf("avgWaitState\n");
+	timeoutCounter++;
+	printf("Counter: %d\n", timeoutCounter);
+
+	if (timeoutCounter >= 3) {
+		printf("Switched to a different state\n");
+		timeoutCounter = 0;
+		currentState = tempRead;
+		stateTableActivated = !stateTableActivated;
+		return errorEvent;
+	}
+	else
+		return timeoutEvent;
 
 }
 
 enum eventCodes disconnectState(void)
 {
-    printf("disconnectState\n");
-    printf("END HERE\n");
-    // while (1);
-    return errorEvent;
+	NVIC->ICER[0] |= (1 << PORTD_IRQn);
+	printf("disconnectState\n");
+	printf("END HERE\n");
+	return errorEvent;
 }
 
 enum eventCodes errorState(void)
 {
-    printf("errorState\n");
-    return disconnectEvent;
+	NVIC->ICER[0] |= (1 << PORTD_IRQn);
+	printf("errorState\n");
+	return disconnectEvent;
 }
+
 
 int main(void) {
 
 	initPortD();
 	Init_SysTick();
+	i2c_master_init();
+	read_temp();
 
 	currentState = tempRead;
 	enum eventCodes (* stateFunction)(void);
@@ -74,13 +96,11 @@ int main(void) {
 	while (1) {
 
 		if (stateTableActivated) {
-//			delay();
 			printf("IN TABLE BASED\n");
 			stateFunction = state[currentState];
 			returnEvent = stateFunction();
 			currentState = stateTable[currentState].onEventArray[returnEvent];
 		} else {
-//			delay();
 			printf("IN STATE BASED\n");
 			switch (currentState)
 			{
@@ -102,9 +122,7 @@ int main(void) {
 				break;
 			}
 		}
-
 	}
-
 
 	return 0 ;
 
@@ -114,8 +132,8 @@ void initPortD(void)
 {
 	SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
 
-	PORTD->PCR[1] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_MUX(1) | \
-			PORT_PCR_IRQC(0x08);
+	PORTD->PCR[5] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_MUX(1) | \
+			PORT_PCR_IRQC(0x8);
 
 	NVIC->ISER[0] |= (1 << PORTD_IRQn);
 }
@@ -144,8 +162,13 @@ void Init_SysTick(void)
 
 void PORTD_IRQHandler(void)
 {
-	PORTD->PCR[1] |= PORT_PCR_ISF_MASK;
-	printf("INTERRUPT!\n");
+	PORTD->PCR[5] |= PORT_PCR_ISF_MASK;
+	NVIC->ICER[0] |= (1 << PORTD_IRQn);
+
+	printf("Entered port interrupt, disabling IRQ\n");
+	printf("ALERT ALERT ALERT ALERT ALERT ALERT\n");
+	alertAddressed = false;
+
 }
 
 void SysTick_Handler(void)  {

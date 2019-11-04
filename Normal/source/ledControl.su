@@ -1,0 +1,5 @@
+ledControl.c:10:6:Init_RGB_LEDs	0	static
+ledControl.c:28:6:ledOff	0	static
+ledControl.c:35:6:redLED	8	static
+ledControl.c:41:6:greenLED	8	static
+ledControl.c:47:6:blueLED	8	static

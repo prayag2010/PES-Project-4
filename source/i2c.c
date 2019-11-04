@@ -1,6 +1,9 @@
 #include "../CMSIS/MKL25Z4.h"
 #include <stdio.h>
 #include "i2c.h"
+#include <stdbool.h>
+
+bool setupOnce = false;
 
 void i2c_master_init()
 {
@@ -15,23 +18,92 @@ void i2c_master_init()
 
 	I2C1->C1 |= I2C_C1_TX_MASK;  //Enabling transmit mode
 	START;
-	DATA(0x91);  //Transmit first byte
+	DATA(0x90);  //Transmit first byte
 	WAIT;
 	if((I2C1->S & I2C_S_RXAK_MASK) == 0)           //Check if slave received a byte
 	{
 		printf("Temperature sensor detected\n");
 		I2C1->S |= I2C_S_RXAK_MASK;
 	}
-	else
-		disconnect();
-	DATA(0x02);  //Send pointer register address of TLow
-	WAIT;
+	else{
+		printf("No device found\n");
+		while(1);
+	}
 
-	DATA(0x16);  //Send MSB of TLow
-	WAIT;
+	//		disconnect();
 
-	DATA(0x00);  //Send LSB of TLow
-	WAIT;
+	if(!setupOnce){
+		//		RESTART;
+		//		DATA(0x90);   //Transmit first byte
+		//		WAIT;
+		//		DATA(0x03);  //Send pointer register address of Temperature
+		//		WAIT;
+		//		//this 00 00
+		//		DATA(0x00);  //Send MSB of THigh
+		//		WAIT;
+		//
+		//		DATA(0x00);  //Send LSB of THigh
+		//		WAIT;
+		//
+		//		for(int i = 0; i < 10000; i++);
+		//
+		//		RESTART;
+		//		DATA(0x90);   //Transmit first byte
+		//		WAIT;
+		//		DATA(0x03);  //Send pointer register address of Temperature
+		//		WAIT;
+		//		//this 00 00
+		//		DATA(0x1C);  //Send MSB of THigh
+		//		WAIT;
+		//
+		//		DATA(0x50);  //Send LSB of THigh
+		//		WAIT;
+		//	}
+
+
+		RESTART;
+		DATA(0x90);   //Transmit first byte
+		WAIT;
+
+		DATA(0x02);  //Send pointer register address of TLow
+		WAIT;
+
+		DATA(0x1C);  //Send MSB of TLow
+		WAIT;
+
+		DATA(0x00);  //Send LSB of TLow
+		WAIT;
+
+
+		//		Thigh
+		RESTART;
+		DATA(0x90);   //Transmit first byte
+		WAIT;
+		DATA(0x03);  //Send pointer register address of Temperature
+		WAIT;
+		//this 00 00
+		DATA(0x1C);  //Send MSB of THigh
+		WAIT;
+
+		DATA(0x00);  //Send LSB of THigh
+		WAIT;
+
+		//Configuration
+		//		RESTART;
+		//		DATA(0x90);   //Transmit first byte
+		//		WAIT;
+		//		DATA(0x01);  //Send pointer register address of config
+		//		WAIT;
+		//
+		//		DATA(0x62);  //config interrupt mode
+		//		WAIT;
+		//
+		//		DATA(0xA0);  //Send
+		//		WAIT;
+
+		setupOnce = true;
+	}
+
 }
 
 uint16_t read_temp()
@@ -43,7 +115,7 @@ uint16_t read_temp()
 	RESTART;
 	DATA(0x90);   //Transmit first byte
 	WAIT;
-	DATA(0x00);  //Send pointer register address of Temperature
+	DATA(0x02);  //Send pointer register address of Temperature
 	WAIT;
 	RESTART;
 

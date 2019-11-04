@@ -5,18 +5,24 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../source/PES\ Project\ 4.c \
+../source/i2c.c \
+../source/ledControl.c \
 ../source/loggerFunctions.c \
 ../source/mtb.c \
 ../source/semihost_hardfault.c 
 
 OBJS += \
 ./source/PES\ Project\ 4.o \
+./source/i2c.o \
+./source/ledControl.o \
 ./source/loggerFunctions.o \
 ./source/mtb.o \
 ./source/semihost_hardfault.o 
 
 C_DEPS += \
 ./source/PES\ Project\ 4.d \
+./source/i2c.d \
+./source/ledControl.d \
 ./source/loggerFunctions.d \
 ./source/mtb.d \
 ./source/semihost_hardfault.d 
