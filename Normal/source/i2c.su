@@ -1,3 +1,2 @@
 i2c.c:8:6:i2c_master_init	16	static
 i2c.c:109:10:read_temp	16	static
-i2c.c:165:6:disconnect	8	static

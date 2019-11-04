@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "i2c.h"
 #include <stdbool.h>
-
+void endProgram(void);
 bool setupOnce = false;
 
 void i2c_master_init()
@@ -27,7 +27,7 @@ void i2c_master_init()
 	}
 	else{
 		printf("No device found\n");
-		while(1);
+		endProgram();
 	}
 
 	//		disconnect();
@@ -162,8 +162,3 @@ uint16_t read_temp()
 		return (temp_read/16);
 }
 
-void disconnect()
-{
-	printf("Temperature sensor not found\n");
-	while(1);
-}

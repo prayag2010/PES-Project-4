@@ -21,6 +21,7 @@ enum eventCodes errorState(void);
 void startSysTick(void);
 void resetSysTick(void);
 
+
 enum stateCodes {tempRead, tempAlert, avgWait, disconnect, error};
 enum eventCodes (* state[])(void) = {tempReadState, tempAlertState, avgWaitState, disconnectState, errorState};
 
