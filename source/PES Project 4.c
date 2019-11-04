@@ -24,8 +24,7 @@ void smallDelay(void)
 enum eventCodes tempReadState(void)
 {
 	PORTD->PCR[5] |= PORT_PCR_ISF_MASK;
-	PORTD->PCR[5] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_MUX(1) | \
-				PORT_PCR_IRQC(0x8);
+	NVIC->ISER[0] |= (1 << PORTD_IRQn);
 //	initPortD();
 	smallDelay();
 	i2c_master_init();
@@ -133,8 +132,9 @@ void initPortD(void)
 	SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
 
 	PORTD->PCR[5] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_MUX(1) | \
-			PORT_PCR_IRQC(0x8);
+			PORT_PCR_IRQC(0xC);
 
+	PORTD->PCR[5] |= PORT_PCR_ISF_MASK;
 	NVIC->ISER[0] |= (1 << PORTD_IRQn);
 }
 

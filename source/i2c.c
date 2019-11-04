@@ -68,7 +68,7 @@ void i2c_master_init()
 		DATA(0x02);  //Send pointer register address of TLow
 		WAIT;
 
-		DATA(0x1C);  //Send MSB of TLow
+		DATA(0x00);  //Send MSB of TLow
 		WAIT;
 
 		DATA(0x00);  //Send LSB of TLow
@@ -81,8 +81,8 @@ void i2c_master_init()
 		WAIT;
 		DATA(0x03);  //Send pointer register address of Temperature
 		WAIT;
-		//this 00 00
-		DATA(0x1C);  //Send MSB of THigh
+
+		DATA(0x00);  //Send MSB of THigh
 		WAIT;
 
 		DATA(0x00);  //Send LSB of THigh
@@ -115,7 +115,7 @@ uint16_t read_temp()
 	RESTART;
 	DATA(0x90);   //Transmit first byte
 	WAIT;
-	DATA(0x02);  //Send pointer register address of Temperature
+	DATA(0x00);  //Send pointer register address of Temperature
 	WAIT;
 	RESTART;
 
