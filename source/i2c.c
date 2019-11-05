@@ -16,6 +16,11 @@ void i2c_master_init()
 	I2C1->F |= I2C_F_MULT(0) | I2C_F_ICR(0x11);   //Setting a baud rate of 300kbps
 	I2C1->C1|= I2C_C1_IICEN_MASK;// | I2C_C1_IICIE_MASK; //Enabling I2C module
 
+}
+
+void start()
+{
+	I2C1->S |= I2C_S_RXAK_MASK;
 	I2C1->C1 |= I2C_C1_TX_MASK;  //Enabling transmit mode
 	START;
 	DATA(0x90);  //Transmit first byte
@@ -79,6 +84,7 @@ void i2c_master_init()
 		RESTART;
 		DATA(0x90);   //Transmit first byte
 		WAIT;
+
 		DATA(0x03);  //Send pointer register address of Temperature
 		WAIT;
 
@@ -138,23 +144,23 @@ uint16_t read_temp()
 	LSB = I2C1->D;
 
 	if( LSB == 0xFF )
-		return 0xFFFF;
+		return 0xFFFF;  //Return error when it reads reserved value
 	if((MSB & 0x80) == 0)
 	{
-		temp_read = (MSB << 4) | ((LSB >> 4) & 0x0F);
-		printf("%x\n", temp_read);
-		printf("The temperature is : %d\n", temp_read/16);
+		temp_read = (MSB << 4) | ((LSB >> 4) & 0x0F);  //Convert into 12 bit format
+//		printf("%x\n", temp_read);
+//		printf("The temperature is : %d\n", temp_read/16);
 	}
 	else
 	{
-		twos_complement = (MSB << 4) | ((LSB >> 4) & 0x0F);
-		printf("%x\n", twos_complement);
-		temp_read = ((~twos_complement) & 0x0FF)  +1;
-		printf("%x\n", temp_read);
+		twos_complement = (MSB << 4) | ((LSB >> 4) & 0x0F);  //Convert into 12 bit format
+		temp_read = ((~twos_complement) & 0x0FF)  +1;  //Find twos complement
+//		printf("%x\n", temp_read);
 		printf("The temperature is : -%d\n", (temp_read)/16);
 	}
 
-	if( twos_complement < (-45) || (temp_read/16) > 125){
+	if( twos_complement < (-45) || (temp_read/16) > 125) //Check if temperature is out of range of sensor
+	{
 		printf("Error in reading temp, function %s", __func__);
 		return 0xFFFF;
 	}

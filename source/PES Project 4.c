@@ -49,7 +49,7 @@ enum eventCodes tempReadState(void)
 	ledOff();
 	greenLED();
 
-	i2c_master_init();
+	start();
 	tempR = read_temp();
 	if(tempR == 0xFFFF)
 		return disconnectEvent;
@@ -65,7 +65,7 @@ enum eventCodes tempAlertState(void)
 	ledOff();
 	blueLED();
 
-	i2c_master_init();
+	start();
 	if(read_temp() == 0xFFFF)
 		return disconnectEvent;
 
@@ -87,7 +87,7 @@ enum eventCodes avgWaitState(void)
 	ledOff();
 	greenLED();
 
-	i2c_master_init();
+	start();
 	if(read_temp() == 0xFFFF)
 		return disconnectEvent;
 
@@ -141,6 +141,7 @@ int main(void) {
 	initPortD();
 	Init_SysTick();
 	i2c_master_init();
+	start();
 	read_temp();
 
 	Init_RGB_LEDs();
@@ -164,21 +165,21 @@ int main(void) {
 			switch (currentState)
 			{
 			case tempRead:
-				i2c_master_init();
+				start();
 				if(read_temp() == 0xFFFF)
 					currentState = disconnect;
 				tempReadState();
 				currentState = tempAlert;
 				break;
 			case tempAlert:
-				i2c_master_init();
+				start();
 				if(read_temp() == 0xFFFF)
 					currentState = disconnect;
 				tempAlertState();
 				currentState = avgWait;
 				break;
 			case avgWait:
-				i2c_master_init();
+				start();
 				if(read_temp() == 0xFFFF)
 					currentState = disconnect;
 				avgWaitState();
