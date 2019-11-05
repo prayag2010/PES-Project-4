@@ -38,8 +38,10 @@ bool log_status(void)
 void log_data(uint32_t *inAddress, size_t length)
 {
 	//Log data at a certain address till length
-	if(loggerEnable){
-		for(size_t i = 0; i < length; i++){
+	if(loggerEnable)
+	{
+		for(size_t i = 0; i < length; i++)
+		{
 			printf("%p: ", inAddress + i);
 			log_integer((inAddress + i));
 		}
@@ -51,7 +53,8 @@ void log_message(int logLevel, const char *functionName, char *message)
 {
 	if(loggerEnable){
 #ifdef debug
-		if(logLevel == 0){
+		if(logLevel == 0)
+		{
 			printf("DEBUG: ");
 			printf("%s: %s\n", functionName, message);
 		}
@@ -65,7 +68,8 @@ void log_message(int logLevel, const char *functionName, char *message)
 #endif
 
 #ifdef normal
-		if (logLevel == 2){
+		if (logLevel == 2)
+		{
 			printf("NORMAL: ");
 			printf("%s: %s\n", functionName, message);
 		}
@@ -87,7 +91,45 @@ void log_message(int logLevel, const char *functionName, char *message)
 	}
 }
 
+void log_message_int(int logLevel, const char *functionName, int message)
+{
+	if(loggerEnable){
+#ifdef debug
+		if(logLevel == 0){
+			printf("DEBUG: ");
+			printf("%s: %d\n", functionName, message);
+		}
+#endif
 
+#ifdef test
+		if (logLevel == 1){
+			printf("TEST: ");
+			printf("%s: %d\n", functionName, message);
+		}
+#endif
+
+#ifdef normal
+		if (logLevel == 2){
+			printf("NORMAL: ");
+			printf("%s: %d\n", functionName, message);
+		}
+#endif
+		//
+		//		if(logLevel == 0){
+		//			printf("DEBUG: ");
+		//			printf("%s: %s\n", functionName, message);
+		//		}
+		//		else if (logLevel == 1){
+		//			printf("TEST: ");
+		//			printf("%s: %s\n", functionName, message);
+		//		}
+		//		else if (logLevel == 2){
+		//			printf("NORMAL: ");
+		//			printf("%s: %s\n", functionName, message);
+		//		}
+
+	}
+}
 void log_string(char *inString)
 {
 	if(loggerEnable)

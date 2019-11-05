@@ -87,4 +87,6 @@ void log_integer(uint32_t *inAddress);
 
 void log_message(int logLevel, const char *functionName, char *message);
 
+void log_message_int(int logLevel, const char *functionName, int message);
+
 #endif /* LOGGERFUNCTIONS_H_ */

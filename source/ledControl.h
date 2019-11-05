@@ -15,6 +15,7 @@
 #define LEDCONTROL_H_
 
 #include "../CMSIS/MKL25Z4.h"
+#include "loggerFunctions.h"
 
 #define RED_LED_POS (18)  //Define port number for Red LED
 #define GREEN_LED_POS (19) //Define port number for Green LED

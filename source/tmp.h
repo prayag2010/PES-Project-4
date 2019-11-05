@@ -23,7 +23,19 @@
 //Loading data into Data register
 #define DATA(x) I2C1->D = I2C_D_DATA(x);
 
+//Slave address in write mode
+#define TMP102_WRITE 0x90
 
+//Slave address in read mode
+#define TMP102_READ 0x91
 
+//Pointer address of TLOW register
+#define TMP102_TLOW 0x02
+
+//Pointer address of THIGH register
+#define TMP102_THIGH 0x03
+
+//Pointer address of TEMPERATURE register
+#define TMP102_TEMPERATURE 0x00
 
 #endif /* TMP_H_ */

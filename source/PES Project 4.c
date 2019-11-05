@@ -10,7 +10,7 @@
 #include "i2c.h"
 #include "ledControl.h"
 
-volatile int i = 0;
+volatile int sysTickCounter = 0;
 
 int average = 0;
 int tempSum = 0;
@@ -30,16 +30,22 @@ void smallDelay(void)
 
 void endProgram(void)
 {
+	resetSysTick();
 	__disable_irq();
 	ledOff();
 	redLED();
-	printf("Temperature sensor error\n");
-	printf("Ending Program\n");
+//	printf("Temperature sensor error\n");
+//	printf("Ending Program\n");
+	log_message(0, __func__, "Temperature sensor error, Ending Program");
+	log_message(1, __func__, "Temperature sensor error, Ending Program");
+	log_message(2, __func__, "Temperature sensor error, Ending Program");
+
 	while(1);
 }
 
 enum eventCodes tempReadState(void)
 {
+	log_message(0, __func__, "Entered Temperature reading state");
 	PORTD->PCR[5] |= PORT_PCR_ISF_MASK;
 	NVIC->ISER[0] |= (1 << PORTD_IRQn);
 	//	initPortD();
@@ -61,9 +67,13 @@ enum eventCodes tempReadState(void)
 		negative = false;
 	}
 
-	if(!alertAddressed){
-//		alertAddressed = true;
-		printf("ALERT DETECTED\n");
+	if(!alertAddressed)
+	{
+		//		alertAddressed = true;
+//		printf("ALERT DETECTED\n");
+		log_message(0, __func__, "Alert Detected");
+		log_message(1, __func__, "Alert Detected");
+		log_message(2, __func__, "Alert Detected");
 		return alertEvent;
 	}
 
@@ -72,6 +82,7 @@ enum eventCodes tempReadState(void)
 
 enum eventCodes tempAlertState(void)
 {
+	log_message(0, __func__, "Entered Alert state");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
 
 	ledOff();
@@ -81,11 +92,15 @@ enum eventCodes tempAlertState(void)
 	if(read_temp() == 0xFFFF)
 		return disconnectEvent;
 
-	printf("tempAlertState\n");
+//	printf("tempAlertState\n");
 
-	if(!alertAddressed){
+	if(!alertAddressed)
+	{
 		alertAddressed = true;
-		printf("ALERT DETECTED\n");
+//		printf("ALERT DETECTED\n");
+		log_message(0, __func__, "Alert Detected");
+		log_message(1, __func__, "Alert Detected");
+		log_message(2, __func__, "Alert Detected");
 	}
 
 	return completeEvent;
@@ -93,7 +108,8 @@ enum eventCodes tempAlertState(void)
 
 enum eventCodes avgWaitState(void)
 {
-	printf("Entered avgWaitState, disabling PORTD IRQ\n");
+	log_message(0, __func__, "Entered Average Wait State, disabling PORTD IRQ");
+//	printf("Entered avgWaitState, disabling PORTD IRQ\n");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
 
 	ledOff();
@@ -113,7 +129,7 @@ enum eventCodes avgWaitState(void)
 		tempSum += (int)tempR;
 
 	average = tempSum / (timeoutCounter + 1);
-	printf("AverageAverageAverageAverageAverageAverageAverage: %d\n", average);
+	printf("Average: %d\n", average);
 
 	while(!delayCompleted);
 	printf("avgWaitState\n");
@@ -121,10 +137,12 @@ enum eventCodes avgWaitState(void)
 	printf("Counter: %d\n", timeoutCounter);
 
 
-	if (timeoutCounter >= 3) {
+	if (timeoutCounter >= 3)
+	{
 		tempSum = 0;
 		average = 0;
-		printf("Switched to a different state machine\n");
+//		printf("Switched to a different state machine\n");
+		log_message(0, __func__, "Switched to a different state machine");
 		timeoutCounter = 0;
 		currentState = tempRead;
 		stateTableActivated = !stateTableActivated;
@@ -137,6 +155,7 @@ enum eventCodes avgWaitState(void)
 
 enum eventCodes disconnectState(void)
 {
+	log_message(0, __func__, "Entered Disconnect state");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
 	printf("disconnectState\n");
 	endProgram();
@@ -145,14 +164,19 @@ enum eventCodes disconnectState(void)
 
 enum eventCodes errorState(void)
 {
+	log_message(0, __func__, "Entered Error state");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
-	printf("errorState\n");
-	printf("State machine return value error, going back to getTemp state\n");
+//	printf("errorState\n");
+//	printf("State machine return value error, going back to getTemp state\n");
+	log_message(0, __func__, "State machine return value error, going back to getTemp state");
+	log_message(1, __func__, "State machine return value error, going back to getTemp state");
+	log_message(2, __func__, "State machine return value error, going back to getTemp state");
 	return completeEvent;
 }
 
 
-int main(void) {
+int main(void)
+{
 
 	initPortD();
 	Init_SysTick();
@@ -161,7 +185,7 @@ int main(void) {
 	read_temp();
 
 	Init_RGB_LEDs();
-
+	ledOff();
 	currentState = tempRead;
 	enum eventCodes (* stateFunction)(void);
 
@@ -169,25 +193,36 @@ int main(void) {
 
 	while (1) {
 
-		if (stateTableActivated) {
-			printf("IN TABLE BASED\n");
+		if (stateTableActivated)
+		{
+//			printf("IN TABLE BASED\n");
+			log_message(0, __func__, "IN TABLE BASED");
+			log_message(1, __func__, "IN TABLE BASED");
+			log_message(2, __func__, "IN TABLE BASED");
 			stateFunction = state[currentState];
 			returnEvent = stateFunction();
 			if(stateTableActivated)
 				currentState = stateTable[currentState].onEventArray[returnEvent];
-		} else {
-			printf("IN STATE BASED\n");
+		}
+		else
+		{
+//			printf("IN STATE BASED\n");
+			log_message(0, __func__, "IN STATE BASED");
+			log_message(1, __func__, "IN STATE BASED");
+			log_message(2, __func__, "IN STATE BASED");
 			printf("Current state: %d\n", currentState);
 			switch (currentState)
 			{
 			case tempRead:
 				start();
-				if(read_temp() == 0xFFFF){
+				if(read_temp() == 0xFFFF)
+				{
 					currentState = disconnect;
 					break;
 				}
 				tempReadState();
-				if(!alertAddressed){
+				if(!alertAddressed)
+				{
 					alertAddressed = true;
 					printf("ALERT DETECTED\n");
 					currentState = tempAlert;
@@ -197,7 +232,8 @@ int main(void) {
 				break;
 			case tempAlert:
 				start();
-				if(read_temp() == 0xFFFF){
+				if(read_temp() == 0xFFFF)
+				{
 					currentState = disconnect;
 					break;
 				}
@@ -206,7 +242,8 @@ int main(void) {
 				break;
 			case avgWait:
 				start();
-				if(read_temp() == 0xFFFF){
+				if(read_temp() == 0xFFFF)
+				{
 					currentState = disconnect;
 					break;
 				}
@@ -278,10 +315,12 @@ void PORTD_IRQHandler(void)
 
 }
 
-void SysTick_Handler(void)  {
-	i++;
-	if(i > 1){
-		i = 0;
+void SysTick_Handler(void)
+{
+	sysTickCounter++;
+	if(sysTickCounter > 1)
+	{
+		sysTickCounter = 0;
 		printf("SYSTICK, 15 seconds completed\n");
 		delayCompleted = true;
 	}

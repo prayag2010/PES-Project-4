@@ -11,6 +11,7 @@ C_SRCS += \
 ../source/loggerFunctions.c \
 ../source/mtb.c \
 ../source/semihost_hardfault.c \
+../source/stateFunctions.c \
 ../source/unitTest.c 
 
 OBJS += \
@@ -21,6 +22,7 @@ OBJS += \
 ./source/loggerFunctions.o \
 ./source/mtb.o \
 ./source/semihost_hardfault.o \
+./source/stateFunctions.o \
 ./source/unitTest.o 
 
 C_DEPS += \
@@ -31,6 +33,7 @@ C_DEPS += \
 ./source/loggerFunctions.d \
 ./source/mtb.d \
 ./source/semihost_hardfault.d \
+./source/stateFunctions.d \
 ./source/unitTest.d 
 
 

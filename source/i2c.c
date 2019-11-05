@@ -15,6 +15,8 @@
 #include "../CMSIS/MKL25Z4.h"
 #include <stdio.h>
 #include "i2c.h"
+#include "loggerFunctions.h"
+
 void endProgram(void);
 bool setupOnce = false;
 bool negative = false;
@@ -31,6 +33,8 @@ void i2c_master_init()
 	I2C1->F |= I2C_F_MULT(0) | I2C_F_ICR(0x11);   //Setting a baud rate of 300kbps
 	I2C1->C1|= I2C_C1_IICEN_MASK;// | I2C_C1_IICIE_MASK; //Enabling I2C module
 
+	log_message(0, __func__, "I2C registers initialised");
+	log_message(1, __func__, "I2C registers initialised");
 }
 
 void start()
@@ -38,16 +42,22 @@ void start()
 	I2C1->S |= I2C_S_RXAK_MASK;
 	I2C1->C1 |= I2C_C1_TX_MASK;  //Enabling transmit mode
 	START;
-	DATA(0x90);  //Transmit first byte
+	DATA(TMP102_WRITE);  //Transmit first byte
 	WAIT;
 	if((I2C1->S & I2C_S_RXAK_MASK) == 0)           //Check if slave received a byte
 	{
 		postCheck = true;
-		printf("Temperature sensor detected\n");
+//		printf("Temperature sensor detected\n");
+		log_message(0, __func__, "Temperature Sensor detected");
+		log_message(1, __func__, "Temperature Sensor detected");
+		log_message(2, __func__, "Temperature Sensor detected");
 		I2C1->S |= I2C_S_RXAK_MASK;
 	}
 	else{
-		printf("No device found\n");
+//		printf("No device found\n");
+		log_message(0, __func__, "No device found");
+		log_message(1, __func__, "No device found");
+		log_message(2, __func__, "No device found");
 		endProgram();
 	}
 
@@ -55,7 +65,7 @@ void start()
 
 	if(!setupOnce){
 		//		RESTART;
-		//		DATA(0x90);   //Transmit first byte
+		//		DATA(TMP102_WRITE);   //Transmit first byte
 		//		WAIT;
 		//		DATA(0x03);  //Send pointer register address of Temperature
 		//		WAIT;
@@ -69,7 +79,7 @@ void start()
 		//		for(int i = 0; i < 10000; i++);
 		//
 		//		RESTART;
-		//		DATA(0x90);   //Transmit first byte
+		//		DATA(TMP102_WRITE);   //Transmit first byte
 		//		WAIT;
 		//		DATA(0x03);  //Send pointer register address of Temperature
 		//		WAIT;
@@ -83,10 +93,10 @@ void start()
 
 
 		RESTART;
-		DATA(0x90);   //Transmit first byte
+		DATA(TMP102_WRITE);   //Transmit first byte
 		WAIT;
 
-		DATA(0x02);  //Send pointer register address of TLow
+		DATA(TMP102_TLOW);  //Send pointer register address of TLow
 		WAIT;
 
 		DATA(0x00);  //Send MSB of TLow
@@ -94,14 +104,16 @@ void start()
 
 		DATA(0x00);  //Send LSB of TLow
 		WAIT;
+		log_message(0, __func__, "TLOW registers initialised");
+		log_message(1, __func__, "TLOW registers initialised");
 
 
-		//		Thigh
+		//Thigh
 		RESTART;
-		DATA(0x90);   //Transmit first byte
+		DATA(TMP102_WRITE);   //Transmit first byte
 		WAIT;
 
-		DATA(0x03);  //Send pointer register address of Temperature
+		DATA(TMP102_THIGH);  //Send pointer register address of Temperature
 		WAIT;
 
 		DATA(0x00);  //Send MSB of THigh
@@ -109,10 +121,11 @@ void start()
 
 		DATA(0x00);  //Send LSB of THigh
 		WAIT;
-
+		log_message(0, __func__, "THIGH registers initialised");
+		log_message(1, __func__, "THIGH registers initialised");
 		//Configuration
 		//		RESTART;
-		//		DATA(0x90);   //Transmit first byte
+		//		DATA(TMP102_WRITE);   //Transmit first byte
 		//		WAIT;
 		//		DATA(0x01);  //Send pointer register address of config
 		//		WAIT;
@@ -134,14 +147,16 @@ uint16_t read_temp()
 	int32_t temp_read = 0;
 	int16_t twos_complement;
 
+	log_message(0, __func__, "Reading Temperature");
+	log_message(1, __func__, "Reading Temperature");
 	RESTART;
-	DATA(0x90);   //Transmit first byte
+	DATA(TMP102_WRITE);   //Transmit first byte
 	WAIT;
-	DATA(0x00);  //Send pointer register address of Temperature
+	DATA(TMP102_TEMPERATURE);  //Send pointer register address of Temperature
 	WAIT;
 	RESTART;
 
-	DATA(0x91);  //Read Temperature
+	DATA(TMP102_READ);  //Read Temperature
 	WAIT;
 
 	//read mode
@@ -179,7 +194,10 @@ uint16_t read_temp()
 
 	if( (temp_read/16) < (-45) || (temp_read/16) > 125) //Check if temperature is out of range of sensor
 	{
-		printf("Error in reading temp, function %s", __func__);
+//		printf("Error in reading temp, function %s", __func__);
+		log_message(0, __func__, "Error in reading temp");
+		log_message(1, __func__, "Error in reading temp");
+		log_message(2, __func__, "Error in reading temp");
 		return 0xFFFF;
 	}
 	else
