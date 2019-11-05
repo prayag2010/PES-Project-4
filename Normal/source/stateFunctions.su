@@ -1,0 +1,7 @@
+stateFunctions.c:192:17:errorState	16	static
+stateFunctions.c:110:17:tempAlertState	16	static
+stateFunctions.c:136:17:avgWaitState	24	static
+stateFunctions.c:73:17:tempReadState	16	static
+stateFunctions.c:53:6:smallDelay	0	static
+stateFunctions.c:58:6:endProgram	16	static
+stateFunctions.c:183:17:disconnectState	8	static

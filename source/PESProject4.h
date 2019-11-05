@@ -8,11 +8,17 @@
 #ifndef PESPROJECT4_H_
 #define PESPROJECT4_H_
 
-void Init_SysTick(void);
-void initPortD(void);
+#define sec15 42915344L
+#define sec3 858306L
+
+
+#include <stdbool.h>
 
 enum eventCodes {timeoutEvent, completeEvent, alertEvent, disconnectEvent, errorEvent};
+enum stateCodes {tempRead, tempAlert, avgWait, disconnect, error};
 
+void Init_SysTick(void);
+void initPortD(void);
 enum eventCodes tempReadState(void);
 enum eventCodes tempAlertState(void);
 enum eventCodes avgWaitState(void);
@@ -22,11 +28,10 @@ void startSysTick(void);
 void resetSysTick(void);
 
 
-enum stateCodes {tempRead, tempAlert, avgWait, disconnect, error};
-enum eventCodes (* state[])(void) = {tempReadState, tempAlertState, avgWaitState, disconnectState, errorState};
+extern enum eventCodes (* state[])(void);
 
-int timeoutCounter = 0;
-bool stateTableActivated = true;
+extern int timeoutCounter;
+extern bool stateTableActivated;
 
 struct stateMachineSkeleton {
     enum stateCodes onEventArray[5];
@@ -37,16 +42,18 @@ struct stateMachineSkeleton {
 };
 
 //timeoutEvent, completeEvent, alertEvent, disconnectEvent, errorEvent
-struct stateMachineSkeleton stateTable[] = {
-    {error, avgWait, tempAlert, disconnect, error}, //tempReadState
-    {error, avgWait, error, disconnect, error}, //tempAlertState
-    {tempRead, error, error, disconnect, error}, //avgWaitState
-    {error, error, error, error, error},//disconnectState
-    {avgWait, avgWait, avgWait, avgWait, avgWait}//errorState
-};
+extern struct stateMachineSkeleton stateTable[5];
+extern enum stateCodes currentState;
+extern enum eventCodes returnEvent;
 
-enum stateCodes currentState = tempRead;
-enum eventCodes returnEvent;
+extern int average;
+extern int tempSum;
+extern uint16_t tempR;
+
+extern volatile bool delayCompleted;
+extern volatile bool alertAddressed;
+
+extern volatile int sysTickCounter;
 
 
 

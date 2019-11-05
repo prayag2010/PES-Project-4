@@ -48,16 +48,16 @@ void start()
 	{
 		postCheck = true;
 //		printf("Temperature sensor detected\n");
-		log_message(0, __func__, "Temperature Sensor detected");
-		log_message(1, __func__, "Temperature Sensor detected");
-		log_message(2, __func__, "Temperature Sensor detected");
+		log_message(0, __func__, "POST: Temperature Sensor detected");
+		log_message(1, __func__, "POST: Temperature Sensor detected");
+		log_message(2, __func__, "POST: Temperature Sensor detected");
 		I2C1->S |= I2C_S_RXAK_MASK;
 	}
 	else{
 //		printf("No device found\n");
-		log_message(0, __func__, "No device found");
-		log_message(1, __func__, "No device found");
-		log_message(2, __func__, "No device found");
+		log_message(0, __func__, "POST: No device found");
+		log_message(1, __func__, "POST: No device found");
+		log_message(2, __func__, "POST: No device found");
 		endProgram();
 	}
 
