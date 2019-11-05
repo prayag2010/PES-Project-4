@@ -17,7 +17,11 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+//If the logger is enabled
 extern bool loggerEnable;
+
+//logger mode
+enum loggerMode {DEBUG, TEST, NORMAL};
 
 /*
  * @brief Enable the logger
@@ -97,7 +101,7 @@ void log_integer(uint32_t *inAddress);
  *
  * @return void
  */
-void log_message(int logLevel, const char *functionName, char *message);
+void log_message(enum loggerMode logLevel, const char *functionName, char *message);
 
 
 /*
@@ -111,6 +115,6 @@ void log_message(int logLevel, const char *functionName, char *message);
  *
  * @return void
  */
-void log_message_int(int logLevel, const char *functionName, int message);
+void log_message_int(enum loggerMode logLevel, const char *functionName, int message);
 
 #endif /* LOGGERFUNCTIONS_H_ */

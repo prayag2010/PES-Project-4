@@ -3,7 +3,9 @@
  * @brief Source file for controlling the I2C registers
  *
  * This header file has functions that initializes the
- * I2C and connects to the TMP102 temperature sensor.
+ * I2C and connects to the TMP102 temperature sensor,
+ * which then returns the current temperature and the alert
+ * status
  *
  * @authors Rahul Ramaprasad, Prayag Milan Desai
  * @date November 1 2019
@@ -38,8 +40,8 @@ void i2c_master_init()
 	I2C1->F |= I2C_F_MULT(0) | I2C_F_ICR(0x11);   //Setting a baud rate of 300kbps
 	I2C1->C1|= I2C_C1_IICEN_MASK;// | I2C_C1_IICIE_MASK; //Enabling I2C module
 
-	log_message(0, __func__, "I2C registers initialised");
-	log_message(1, __func__, "I2C registers initialised");
+	log_message(DEBUG, __func__, "I2C registers initialised");
+	log_message(TEST, __func__, "I2C registers initialised");
 }
 
 void start()
@@ -53,16 +55,16 @@ void start()
 	{
 		postCheck = true;
 //		printf("Temperature sensor detected\n");
-		log_message(0, __func__, "Temperature Sensor detected");
-		log_message(1, __func__, "Temperature Sensor detected");
-		log_message(2, __func__, "Temperature Sensor detected");
+		log_message(DEBUG, __func__, "Temperature Sensor detected");
+		log_message(TEST, __func__, "Temperature Sensor detected");
+		log_message(NORMAL, __func__, "Temperature Sensor detected");
 		I2C1->S |= I2C_S_RXAK_MASK;
 	}
 	else{
 //		printf("No device found\n");
-		log_message(0, __func__, "No device found");
-		log_message(1, __func__, "No device found");
-		log_message(2, __func__, "No device found");
+		log_message(DEBUG, __func__, "No device found");
+		log_message(TEST, __func__, "No device found");
+		log_message(NORMAL, __func__, "No device found");
 		endProgram();
 	}
 
@@ -200,9 +202,9 @@ uint16_t read_temp()
 	if( (temp_read/16) < (-45) || (temp_read/16) > 125) //Check if temperature is out of range of sensor
 	{
 //		printf("Error in reading temp, function %s", __func__);
-		log_message(0, __func__, "Error in reading temp");
-		log_message(1, __func__, "Error in reading temp");
-		log_message(2, __func__, "Error in reading temp");
+		log_message(DEBUG, __func__, "Error in reading temp");
+		log_message(TEST, __func__, "Error in reading temp");
+		log_message(NORMAL, __func__, "Error in reading temp");
 		return 0xFFFF;
 	}
 	else

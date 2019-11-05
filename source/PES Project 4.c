@@ -12,7 +12,7 @@
  * displays it's temperature, while recording an average.
  * The state machine changes the color of the onboard RGB
  * LED depending on the state entered. It alerts the user if
- * temperature has dropped below 0, while logging and checking
+ * temperature has dropped below 0 C, while logging and checking
  * if the sensor is still connected.
  *
  * @authors Rahul Ramaprasad, Prayag Milan Desai
@@ -24,6 +24,7 @@
 //All state functions are declared in this file
 #include "stateFunctions.h"
 
+//standard IO header for communication
 #include <stdio.h>
 //#include "board.h"
 //#include "pin_mux.h"
@@ -78,9 +79,9 @@ int main(void)
 		{
 //			printf("IN TABLE BASED\n");
 			//Log
-			log_message(0, __func__, "IN TABLE BASED");
-			log_message(1, __func__, "IN TABLE BASED");
-			log_message(2, __func__, "IN TABLE BASED");
+			log_message(DEBUG, __func__, "IN TABLE BASED");
+			log_message(TEST, __func__, "IN TABLE BASED");
+			log_message(NORMAL, __func__, "IN TABLE BASED");
 
 			//Load the new state
 			stateFunction = state[currentState];
@@ -96,9 +97,9 @@ int main(void)
 		else
 		{
 //			printf("IN STATE BASED\n");
-			log_message(0, __func__, "IN STATE BASED");
-			log_message(1, __func__, "IN STATE BASED");
-			log_message(2, __func__, "IN STATE BASED");
+			log_message(DEBUG, __func__, "IN STATE BASED");
+			log_message(TEST, __func__, "IN STATE BASED");
+			log_message(NORMAL, __func__, "IN STATE BASED");
 			printf("Current state: %d\n", currentState);
 			switch (currentState)
 			{

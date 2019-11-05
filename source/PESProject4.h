@@ -145,6 +145,7 @@ extern int timeoutCounter;
 //If the state or the table based state machine is activated
 extern bool stateTableActivated;
 
+//The state table declaration
 struct stateMachineSkeleton {
     enum stateCodes onEventArray[5];
     // enum stateCodes onTimeoutEventState;
@@ -154,17 +155,28 @@ struct stateMachineSkeleton {
 };
 
 //timeoutEvent, completeEvent, alertEvent, disconnectEvent, errorEvent
+//The state table
 extern struct stateMachineSkeleton stateTable[5];
+
+//The current state code
 extern enum stateCodes currentState;
+//The return event
 extern enum eventCodes returnEvent;
 
+//The average of temperatures
 extern int average;
+//The sum of the temperatures
 extern int tempSum;
+//The read temperature from the sensor
 extern uint16_t tempR;
 
+//Check if 15 seconds have passed
 extern volatile bool delayCompleted;
+
+//Check if alert is addressed, in case it happened
 extern volatile bool alertAddressed;
 
+//Count the systick interrupts
 extern volatile int sysTickCounter;
 
 

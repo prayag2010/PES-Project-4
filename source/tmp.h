@@ -1,8 +1,15 @@
 /*
- * tmp.h
+ * @file tmp
+ * @brief Header file that contains macros
  *
- *  Created on: 04-Nov-2019
- *      Author: prayag
+ * This header file contains macros that are specific
+ * to the I2C peripheral in the FRDM-MKL25Z board
+ * that the registers in the TMP102 temperature
+ * sensor
+ *
+ * @authors Rahul Ramaprasad, Prayag Milan Desai
+ * @date November 1 2019
+ * @verison 1.0
  */
 
 #ifndef TMP_H_
