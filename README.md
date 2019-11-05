@@ -64,7 +64,7 @@ This project has the following requirements, that are fulfilled using the aforem
 
 
 **Issues faced**  
-Tried the interrupt based approach to read the temperature, ran into some errors. So, switched to polling approach to read the temperature. Ran into errors while reading the THIGH register and realised that we had not put a WAIT signal after writing to TLOW and before writing to THIGH. 
+Tried the interrupt based approach for I2C communication with the temperature sensor, ran into some errors. So, switched to polling approach to read the temperature. Ran into errors while reading the THIGH register and realised that we had not put a WAIT signal after writing to TLOW and before writing to THIGH. 
 
 
 
