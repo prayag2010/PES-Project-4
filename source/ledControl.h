@@ -1,8 +1,14 @@
 /*
- * ledControl.h
+ * @file ledControl.h
+ * @brief Header file for controlling the RGB LED
  *
- *  Created on: Nov 3, 2019
- *      Author: rahul
+ * This header file has prototypes for functions that
+ * turns LEDs on and off of a particular color, based
+ * on the function called
+ *
+ * @authors Rahul Ramaprasad, Prayag Milan Desai
+ * @date November 1 2019
+ * @verison 1.0
  */
 
 #ifndef LEDCONTROL_H_
@@ -16,13 +22,50 @@
 
 #define MASK(x) (1UL << (x))
 
+/*
+ * @brief Initializes the LED pins
+ *
+ * Enables the clocks, sets pins as outputs, etc for the LEDs
+ * using the bare metal functions
+ *
+ * @return void
+ */
 void Init_RGB_LEDs(void);
+
+/*
+ * @brief Turns off all LEDs
+ *
+ * Turns off all RGB leds
+ *
+ * @return void
+ */
 void ledOff();
 
+/*
+ * @brief Change LED color
+ *
+ * Change LED color to red
+ *
+ * @return void
+ */
 void redLED();
 
+/*
+ * @brief Change LED color
+ *
+ * Change LED color to green
+ *
+ * @return void
+ */
 void greenLED();
 
+/*
+ * @brief Change LED color
+ *
+ * Change LED color to blue
+ *
+ * @return void
+ */
 void blueLED();
 
 #endif /* LEDCONTROL_H_ */

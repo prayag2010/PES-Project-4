@@ -7,7 +7,7 @@
  * and data at memory locations
  *
  * @authors Rahul Ramaprasad, Prayag Milan Desai
- * @date October 20 2019
+ * @date November 1 2019
  * @verison 1.0
  */
 #ifndef LOGGERFUNCTIONS_H_

@@ -1,9 +1,24 @@
+/*
+ * @file i2c.c
+ * @brief Source file for controlling the I2C registers
+ *
+ * This header file has prototypes for functions that
+ * turns I2C on and connects to the temperature sensor.
+ * This function also has the macros for all I2C
+ * operations
+ *
+ * @authors Rahul Ramaprasad, Prayag Milan Desai
+ * @date November 1 2019
+ * @verison 1.0
+ */
+
 #include "../CMSIS/MKL25Z4.h"
 #include <stdio.h>
 #include "i2c.h"
-#include <stdbool.h>
 void endProgram(void);
 bool setupOnce = false;
+bool negative = false;
+bool postCheck = false;
 
 void i2c_master_init()
 {
@@ -27,6 +42,7 @@ void start()
 	WAIT;
 	if((I2C1->S & I2C_S_RXAK_MASK) == 0)           //Check if slave received a byte
 	{
+		postCheck = true;
 		printf("Temperature sensor detected\n");
 		I2C1->S |= I2C_S_RXAK_MASK;
 	}
@@ -115,7 +131,7 @@ void start()
 uint16_t read_temp()
 {
 	uint8_t MSB = 0, LSB = 0;
-	uint16_t temp_read = 0;
+	int32_t temp_read = 0;
 	int16_t twos_complement;
 
 	RESTART;
@@ -153,13 +169,15 @@ uint16_t read_temp()
 	}
 	else
 	{
+		negative = true;
+//		printf("Negative\n");
 		twos_complement = (MSB << 4) | ((LSB >> 4) & 0x0F);  //Convert into 12 bit format
 		temp_read = ((~twos_complement) & 0x0FF)  +1;  //Find twos complement
 //		printf("%x\n", temp_read);
-		printf("The temperature is : -%d\n", (temp_read)/16);
+//		printf("The temperature is : -%d\n", (temp_read)/16);
 	}
 
-	if( twos_complement < (-45) || (temp_read/16) > 125) //Check if temperature is out of range of sensor
+	if( (temp_read/16) < (-45) || (temp_read/16) > 125) //Check if temperature is out of range of sensor
 	{
 		printf("Error in reading temp, function %s", __func__);
 		return 0xFFFF;

@@ -10,7 +10,6 @@
 #include "i2c.h"
 #include "ledControl.h"
 
-
 volatile int i = 0;
 
 int average = 0;
@@ -54,7 +53,13 @@ enum eventCodes tempReadState(void)
 	if(tempR == 0xFFFF)
 		return disconnectEvent;
 
-	printf("tempReadState %d\n", tempR);
+	if (!(negative))
+		printf("tempReadState %d\n", tempR);
+	else
+	{
+		printf("tempReadState -%d\n", tempR);
+		negative = false;
+	}
 	return alertEvent;
 }
 
