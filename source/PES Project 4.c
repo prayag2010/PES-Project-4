@@ -60,7 +60,14 @@ enum eventCodes tempReadState(void)
 		printf("tempReadState -%d\n", tempR);
 		negative = false;
 	}
-	return alertEvent;
+
+	if(!alertAddressed){
+//		alertAddressed = true;
+		printf("ALERT DETECTED\n");
+		return alertEvent;
+	}
+
+	return completeEvent;
 }
 
 enum eventCodes tempAlertState(void)
@@ -100,9 +107,13 @@ enum eventCodes avgWaitState(void)
 	resetSysTick();
 	startSysTick();
 
-	tempSum += (int)tempR;
+	if(negative)
+		tempSum -= (int)tempR;
+	else
+		tempSum += (int)tempR;
+
 	average = tempSum / (timeoutCounter + 1);
-	printf("Average: %d\n", average);
+	printf("AverageAverageAverageAverageAverageAverageAverage: %d\n", average);
 
 	while(!delayCompleted);
 	printf("avgWaitState\n");
@@ -171,22 +182,34 @@ int main(void) {
 			{
 			case tempRead:
 				start();
-				if(read_temp() == 0xFFFF)
+				if(read_temp() == 0xFFFF){
 					currentState = disconnect;
+					break;
+				}
 				tempReadState();
-				currentState = tempAlert;
+				if(!alertAddressed){
+					alertAddressed = true;
+					printf("ALERT DETECTED\n");
+					currentState = tempAlert;
+					break;
+				}
+				currentState = avgWait;
 				break;
 			case tempAlert:
 				start();
-				if(read_temp() == 0xFFFF)
+				if(read_temp() == 0xFFFF){
 					currentState = disconnect;
+					break;
+				}
 				tempAlertState();
 				currentState = avgWait;
 				break;
 			case avgWait:
 				start();
-				if(read_temp() == 0xFFFF)
+				if(read_temp() == 0xFFFF){
 					currentState = disconnect;
+					break;
+				}
 				avgWaitState();
 				currentState = tempRead;
 				break;

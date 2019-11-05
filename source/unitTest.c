@@ -32,6 +32,7 @@ void unitTest(void)
 	UCUNIT_WriteString("Checking if the sensor is reading the current temperature\n");
 	i2c_master_init();
 	start();
+
 	uint16_t temperature = read_temp();
 	UCUNIT_CheckIsEqual(temperature, 23);
 
