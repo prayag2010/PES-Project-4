@@ -4,8 +4,6 @@
  *
  * This header file has prototypes for functions that
  * turns I2C on and connects to the temperature sensor.
- * This function also has the macros for all I2C
- * operations
  *
  * @authors Rahul Ramaprasad, Prayag Milan Desai
  * @date November 1 2019
@@ -32,6 +30,7 @@ extern bool postCheck;
  */
 void i2c_master_init();
 
+
 /*
  * @brief Reads the Temperature
  *
@@ -42,9 +41,16 @@ void i2c_master_init();
  *
  * @return uint16_t
  */
-
 uint16_t read_temp();
 
+
+/*
+ * @brief Send start bit
+ *
+ * Start the i2c transaction
+ *
+ * @return void
+ */
 void start();
 
 

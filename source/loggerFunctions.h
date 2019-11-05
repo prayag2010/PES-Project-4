@@ -85,8 +85,32 @@ void log_string(char *inString);
  */
 void log_integer(uint32_t *inAddress);
 
+
+/*
+ * @brief Print a formatted string
+ *
+ * This function prints a string formatted in a manner
+ * depending on the build configuration selected
+ *
+ * @param The build config number, the name of func from
+ * which it is being called, The message
+ *
+ * @return void
+ */
 void log_message(int logLevel, const char *functionName, char *message);
 
+
+/*
+ * @brief Print a formatted integer
+ *
+ * This function prints an integer formatted in a manner
+ * depending on the build configuration selected
+ *
+ * @param The build config number, the name of func from
+ * which it is being called, The message
+ *
+ * @return void
+ */
 void log_message_int(int logLevel, const char *functionName, int message);
 
 #endif /* LOGGERFUNCTIONS_H_ */

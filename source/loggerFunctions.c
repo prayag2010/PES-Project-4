@@ -49,9 +49,11 @@ void log_data(uint32_t *inAddress, size_t length)
 	}
 }
 
+//Print a message in a particular format based on build config
 void log_message(int logLevel, const char *functionName, char *message)
 {
 	if(loggerEnable){
+		//log if debug build config is selected
 #ifdef debug
 		if(logLevel == 0)
 		{
@@ -61,6 +63,7 @@ void log_message(int logLevel, const char *functionName, char *message)
 #endif
 
 #ifdef test
+		//log if test build config is selected
 		if (logLevel == 1){
 			printf("TEST: ");
 			printf("%s: %s\n", functionName, message);
@@ -68,6 +71,7 @@ void log_message(int logLevel, const char *functionName, char *message)
 #endif
 
 #ifdef normal
+		//log if normal build config is selected
 		if (logLevel == 2)
 		{
 			printf("NORMAL: ");
@@ -91,10 +95,12 @@ void log_message(int logLevel, const char *functionName, char *message)
 	}
 }
 
+//Print an integer in a particular format based on build config
 void log_message_int(int logLevel, const char *functionName, int message)
 {
 	if(loggerEnable){
 #ifdef debug
+		//log if debug build config is selected
 		if(logLevel == 0){
 			printf("DEBUG: ");
 			printf("%s: %d\n", functionName, message);
@@ -102,6 +108,7 @@ void log_message_int(int logLevel, const char *functionName, int message)
 #endif
 
 #ifdef test
+		//log if test build config is selected
 		if (logLevel == 1){
 			printf("TEST: ");
 			printf("%s: %d\n", functionName, message);
@@ -109,6 +116,7 @@ void log_message_int(int logLevel, const char *functionName, int message)
 #endif
 
 #ifdef normal
+		//log if normal build config is selected
 		if (logLevel == 2){
 			printf("NORMAL: ");
 			printf("%s: %d\n", functionName, message);

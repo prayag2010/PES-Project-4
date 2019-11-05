@@ -2,10 +2,8 @@
  * @file i2c.c
  * @brief Source file for controlling the I2C registers
  *
- * This header file has prototypes for functions that
- * turns I2C on and connects to the temperature sensor.
- * This function also has the macros for all I2C
- * operations
+ * This header file has functions that initializes the
+ * I2C and connects to the TMP102 temperature sensor.
  *
  * @authors Rahul Ramaprasad, Prayag Milan Desai
  * @date November 1 2019
@@ -17,9 +15,16 @@
 #include "i2c.h"
 #include "loggerFunctions.h"
 
+//Function that terminates program
 void endProgram(void);
+
+//Set up tlow and thigh on boot
 bool setupOnce = false;
+
+//if temperature is -ve
 bool negative = false;
+
+//is POST passed
 bool postCheck = false;
 
 void i2c_master_init()
@@ -48,16 +53,16 @@ void start()
 	{
 		postCheck = true;
 //		printf("Temperature sensor detected\n");
-		log_message(0, __func__, "POST: Temperature Sensor detected");
-		log_message(1, __func__, "POST: Temperature Sensor detected");
-		log_message(2, __func__, "POST: Temperature Sensor detected");
+		log_message(0, __func__, "Temperature Sensor detected");
+		log_message(1, __func__, "Temperature Sensor detected");
+		log_message(2, __func__, "Temperature Sensor detected");
 		I2C1->S |= I2C_S_RXAK_MASK;
 	}
 	else{
 //		printf("No device found\n");
-		log_message(0, __func__, "POST: No device found");
-		log_message(1, __func__, "POST: No device found");
-		log_message(2, __func__, "POST: No device found");
+		log_message(0, __func__, "No device found");
+		log_message(1, __func__, "No device found");
+		log_message(2, __func__, "No device found");
 		endProgram();
 	}
 
