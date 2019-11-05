@@ -48,7 +48,7 @@ The file `unitTestResults.out` has the output of the unit tests captured in it.
 **Installation/execution notes for the C code in this repository:**  
 All the code in this repository should be executed using the following command:  
 `make -r -j3 "target"`  
-Where, "target" has four choices
+Where, "target" has three choices
 - *Debug*: This target builds the output for the KL25Z.The output LEDs will change according to the states and the messages will be logged.   
 - *Normal*: This target builds the output for the KL25Z. The output LEDs will change according to the state changes, and a log output is displayed.
 - *Test*: This target builds the output for the PC. This target logs messages after executing uCUnit test cases. 
@@ -64,8 +64,7 @@ This project has the following requirements, that are fulfilled using the aforem
 
 
 **Issues faced**  
-Tried to implement a custom malloc function for the FRDM board, but we could not figure out a way to allocate a block of memory in the board for us to use for our custom function. However, we implemented a custom malloc function on the PC.   
-Also, while making the code modular we ran into the issue of multiple definitions of functions and variables and we resolved that by using extern keyword and creating a common header file.  
+Tried the interrupt based approach to read the temperature, ran into some errors. So, switched to polling approach to read the temperature. Ran into errors while reading the THIGH register and realised that we had not put a WAIT signal after writing to TLOW and before writing to THIGH. 
 
 
 
