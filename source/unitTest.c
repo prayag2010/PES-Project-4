@@ -26,6 +26,7 @@ void unitTest(void)
 	//Checking if the power on self test works
 	UCUNIT_WriteString("Checking if POST is passed\n");
 	i2c_master_init();
+	start();
 	UCUNIT_CheckIsEqual(postCheck, true);
 
 	//Checking current temperature
