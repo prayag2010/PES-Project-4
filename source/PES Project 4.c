@@ -74,7 +74,7 @@ int main(void)
 	//Function pointer for the table based state machine
 	enum eventCodes (* stateFunction)(void);
 
-#ifdef debug
+#ifdef test
 	unitTest();
 #endif
 
