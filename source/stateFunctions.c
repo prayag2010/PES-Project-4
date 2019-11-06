@@ -225,7 +225,9 @@ enum eventCodes disconnectState(void)
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
 	printf("disconnectState\n");
 	//end the program
+#ifndef debug
 	endProgram();
+#endif
 	return errorEvent;
 }
 

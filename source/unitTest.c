@@ -67,10 +67,10 @@ void unitTest(void)
 	UCUNIT_CheckTracepointCoverage(2);
 
 //	//Check the tracepoint coverage in disconnected state
-//	UCUNIT_WriteString("Checking the tracepoint in disconnected state\n");
-//	UCUNIT_ResetTracepointCoverage(); /* start tracking */
-//	disconnectState();
-//	UCUNIT_CheckTracepointCoverage(3);
+	UCUNIT_WriteString("Checking the tracepoint in disconnected state\n");
+	UCUNIT_ResetTracepointCoverage(); /* start tracking */
+	disconnectState();
+	UCUNIT_CheckTracepointCoverage(3);
 
 	//Check the tracepoint coverage in Error state
 	UCUNIT_WriteString("Checking the tracepoint in Error state\n");

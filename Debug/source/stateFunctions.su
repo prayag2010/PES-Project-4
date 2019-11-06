@@ -4,4 +4,4 @@ stateFunctions.c:89:17:tempReadState	8	static
 stateFunctions.c:135:17:tempAlertState	8	static
 stateFunctions.c:165:17:avgWaitState	8	static
 stateFunctions.c:219:17:disconnectState	8	static
-stateFunctions.c:232:17:errorState	8	static
+stateFunctions.c:234:17:errorState	8	static
