@@ -66,7 +66,7 @@ volatile bool alertAddressed = true;
 //A small delay for the interrupt to settle
 void smallDelay(void)
 {
-	for(int i = 0; i < 10000; i++);
+	for(volatile int i = 0; i < 10000; i++);
 }
 
 //If program ends
@@ -113,10 +113,14 @@ enum eventCodes tempReadState(void)
 
 
 	if (!(negative))
+	{
 		log_message_int(NORMAL, __func__, "Temperature: ", tempR);
+		log_message_int(DEBUG, __func__, "Temperature: ", tempR);
+	}
 	else
 	{
 		log_message_int(NORMAL, __func__, "Temperature: -", tempR);
+		log_message_int(DEBUG, __func__, "Temperature: -", tempR);
 		negative = false;
 	}
 
@@ -140,7 +144,7 @@ enum eventCodes tempAlertState(void)
 
 	ledOff();
 	blueLED();
-
+	smallDelay();
 	//return disconnect if error
 	start();
 	if(read_temp() == 0xFFFF)
@@ -187,7 +191,7 @@ enum eventCodes avgWaitState(void)
 	average = tempSum / (averageDiv);
 
 	log_message_int(NORMAL, __func__, "Average: ", average);
-
+	log_message_int(DEBUG, __func__, "Average: ", average);
 	//wait for delay
 	while(!delayCompleted);
 	timeoutCounter++;
@@ -258,7 +262,7 @@ void resetSysTick(void)
 	//Disable the systick
 	SysTick->CTRL &= ~(SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk);
 	//Load value eq to 15 sec
-	SysTick->LOAD = sec3;
+	SysTick->LOAD = sec15;
 	//set the value register to 0
 	SysTick->VAL = 0;
 	//reset flag
@@ -276,7 +280,7 @@ void startSysTick(void)
 void Init_SysTick(void)
 {
 	//Load value eq to 15 sec
-	SysTick->LOAD = sec3;
+	SysTick->LOAD = sec15;
 	//Set the systick timer priority
 	NVIC_SetPriority(SysTick_IRQn, 3);
 	//set the value register to 0

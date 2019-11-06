@@ -90,7 +90,7 @@ void log_message_int(enum loggerMode logLevel, const char *functionName, char* m
 		//log if debug build config is selected
 		if(logLevel == DEBUG){
 			printf("DEBUG: ");
-			printf("%s: %d\n", functionName, message);
+			printf("%s: %s %d\n", functionName, message, number);
 		}
 #endif
 
