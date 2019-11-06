@@ -13,6 +13,10 @@
 #ifndef FRDM_INCLUDES_UNITTEST_H_
 #define FRDM_INCLUDES_UNITTEST_H_
 
+#include "ledControl.h"
+#include "i2c.h"
+#include "PESProject4.h"
+
 /*
  * @brief Performs a set of unit tests on the KL25Z board
  *

@@ -5,21 +5,36 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../source/PES\ Project\ 4.c \
+../source/System.c \
+../source/i2c.c \
+../source/ledControl.c \
 ../source/loggerFunctions.c \
 ../source/mtb.c \
-../source/semihost_hardfault.c 
+../source/semihost_hardfault.c \
+../source/stateFunctions.c \
+../source/unitTest.c 
 
 OBJS += \
 ./source/PES\ Project\ 4.o \
+./source/System.o \
+./source/i2c.o \
+./source/ledControl.o \
 ./source/loggerFunctions.o \
 ./source/mtb.o \
-./source/semihost_hardfault.o 
+./source/semihost_hardfault.o \
+./source/stateFunctions.o \
+./source/unitTest.o 
 
 C_DEPS += \
 ./source/PES\ Project\ 4.d \
+./source/System.d \
+./source/i2c.d \
+./source/ledControl.d \
 ./source/loggerFunctions.d \
 ./source/mtb.d \
-./source/semihost_hardfault.d 
+./source/semihost_hardfault.d \
+./source/stateFunctions.d \
+./source/unitTest.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

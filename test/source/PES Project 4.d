@@ -1,24 +1,37 @@
-source/PES\ Project\ 4.d: ../source/PES\ Project\ 4.c ../board/board.h \
- ../board/peripherals.h ../board/pin_mux.h ../board/clock_config.h \
- ../CMSIS/MKL25Z4.h ../CMSIS/core_cm0plus.h ../CMSIS/core_cmInstr.h \
- ../CMSIS/cmsis_gcc.h ../CMSIS/core_cmFunc.h ../CMSIS/system_MKL25Z4.h
+source/PES\ Project\ 4.d: ../source/PES\ Project\ 4.c \
+ ../source/stateFunctions.h ../source/i2c.h ../source/../CMSIS/MKL25Z4.h \
+ ../source/../CMSIS/core_cm0plus.h ../source/../CMSIS/core_cmInstr.h \
+ ../source/../CMSIS/cmsis_gcc.h ../source/../CMSIS/core_cmFunc.h \
+ ../source/../CMSIS/system_MKL25Z4.h ../source/tmp.h \
+ ../source/ledControl.h ../source/loggerFunctions.h ../source/uCUnit.h \
+ ../source/System.h ../source/PESProject4.h ../source/unitTest.h
 
-../board/board.h:
+../source/stateFunctions.h:
 
-../board/peripherals.h:
+../source/i2c.h:
 
-../board/pin_mux.h:
+../source/../CMSIS/MKL25Z4.h:
 
-../board/clock_config.h:
+../source/../CMSIS/core_cm0plus.h:
 
-../CMSIS/MKL25Z4.h:
+../source/../CMSIS/core_cmInstr.h:
 
-../CMSIS/core_cm0plus.h:
+../source/../CMSIS/cmsis_gcc.h:
 
-../CMSIS/core_cmInstr.h:
+../source/../CMSIS/core_cmFunc.h:
 
-../CMSIS/cmsis_gcc.h:
+../source/../CMSIS/system_MKL25Z4.h:
 
-../CMSIS/core_cmFunc.h:
+../source/tmp.h:
 
-../CMSIS/system_MKL25Z4.h:
+../source/ledControl.h:
+
+../source/loggerFunctions.h:
+
+../source/uCUnit.h:
+
+../source/System.h:
+
+../source/PESProject4.h:
+
+../source/unitTest.h:

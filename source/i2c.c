@@ -47,6 +47,8 @@ void i2c_master_init()
 void start()
 {
 	I2C1->S |= I2C_S_RXAK_MASK;
+	I2C1->C1 |= I2C_C1_TXAK_MASK;
+
 	I2C1->C1 |= I2C_C1_TX_MASK;  //Enabling transmit mode
 	START;
 	DATA(TMP102_WRITE);  //Transmit first byte
@@ -111,8 +113,8 @@ void start()
 
 		DATA(0x00);  //Send LSB of TLow
 		WAIT;
-		log_message(0, __func__, "TLOW registers initialised");
-		log_message(1, __func__, "TLOW registers initialised");
+		log_message(DEBUG, __func__, "TLOW registers initialised");
+		log_message(TEST, __func__, "TLOW registers initialised");
 
 
 		//Thigh
@@ -128,8 +130,8 @@ void start()
 
 		DATA(0x00);  //Send LSB of THigh
 		WAIT;
-		log_message(0, __func__, "THIGH registers initialised");
-		log_message(1, __func__, "THIGH registers initialised");
+		log_message(DEBUG, __func__, "THIGH registers initialised");
+		log_message(TEST, __func__, "THIGH registers initialised");
 		//Configuration
 		//		RESTART;
 		//		DATA(TMP102_WRITE);   //Transmit first byte
@@ -154,8 +156,8 @@ uint16_t read_temp()
 	int32_t temp_read = 0;
 	int16_t twos_complement;
 
-	log_message(0, __func__, "Reading Temperature");
-	log_message(1, __func__, "Reading Temperature");
+	log_message(DEBUG, __func__, "Reading Temperature");
+	log_message(TEST, __func__, "Reading Temperature");
 	RESTART;
 	DATA(TMP102_WRITE);   //Transmit first byte
 	WAIT;

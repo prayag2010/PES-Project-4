@@ -1,7 +1,7 @@
-stateFunctions.c:225:17:errorState	16	static
-stateFunctions.c:134:17:tempAlertState	16	static
-stateFunctions.c:162:17:avgWaitState	24	static
-stateFunctions.c:90:17:tempReadState	16	static
-stateFunctions.c:66:6:smallDelay	0	static
-stateFunctions.c:72:6:endProgram	16	static
-stateFunctions.c:214:17:disconnectState	8	static
+stateFunctions.c:232:17:errorState	16	static
+stateFunctions.c:135:17:tempAlertState	16	static
+stateFunctions.c:165:17:avgWaitState	24	static
+stateFunctions.c:89:17:tempReadState	16	static
+stateFunctions.c:65:6:smallDelay	0	static
+stateFunctions.c:71:6:endProgram	16	static
+stateFunctions.c:219:17:disconnectState	8	static

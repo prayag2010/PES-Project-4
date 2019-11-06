@@ -42,6 +42,8 @@
 //RGB LED control functions
 #include "ledControl.h"
 
+#include "unitTest.h"
+
 
 
 int main(void)
@@ -70,6 +72,10 @@ int main(void)
 
 	//Function pointer for the table based state machine
 	enum eventCodes (* stateFunction)(void);
+
+#ifdef debug
+	unitTest();
+#endif
 
 	//Infinite loop
 	while (1) {

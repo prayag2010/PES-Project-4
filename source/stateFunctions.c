@@ -13,7 +13,6 @@
  */
 
 #include "stateFunctions.h"
-#include "ledControl.h"
 #include "MKL25Z4.h"
 #include <stdio.h>
 
@@ -89,6 +88,8 @@ void endProgram(void)
 
 enum eventCodes tempReadState(void)
 {
+    UCUNIT_Tracepoint(0); /* mark trace point */
+
 	log_message(0, __func__, "Entered Temperature reading state");
 
 	//Enable port D interrupt for alert
@@ -133,6 +134,8 @@ enum eventCodes tempReadState(void)
 
 enum eventCodes tempAlertState(void)
 {
+    UCUNIT_Tracepoint(1); /* mark trace point */
+
 	//disable port D interrupt
 	log_message(DEBUG, __func__, "Entered Alert state");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
@@ -161,6 +164,8 @@ enum eventCodes tempAlertState(void)
 
 enum eventCodes avgWaitState(void)
 {
+    UCUNIT_Tracepoint(2); /* mark trace point */
+
 	log_message(DEBUG, __func__, "Entered Average Wait State, disabling PORTD IRQ");
 //	printf("Entered avgWaitState, disabling PORTD IRQ\n");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
@@ -213,6 +218,8 @@ enum eventCodes avgWaitState(void)
 
 enum eventCodes disconnectState(void)
 {
+    UCUNIT_Tracepoint(3); /* mark trace point */
+
 	//disable interrupts
 	log_message(DEBUG, __func__, "Entered Disconnect state");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
@@ -224,6 +231,8 @@ enum eventCodes disconnectState(void)
 
 enum eventCodes errorState(void)
 {
+    UCUNIT_Tracepoint(4); /* mark trace point */
+
 	//disable port D interrupt
 	log_message(DEBUG, __func__, "Entered Error state");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);

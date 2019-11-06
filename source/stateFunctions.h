@@ -14,7 +14,8 @@
 #define STATEFUNCTIONS_H_
 
 #include "i2c.h"
-
+#include "ledControl.h"
+#include "uCUnit.h"
 //Look here for the state machine function prototypes
 //and description
 #include "PESProject4.h"
