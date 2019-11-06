@@ -8,6 +8,9 @@
 
 ---
 
+**Notes**  
+This project does not use any KL25Z SDK functions, and relies on the MKL25Z4.h header file.
+
 **Description of repository contents:**  
 >This repository contains ten folders, each having multiple source and header files. The description of the folders are as follows:  
 
@@ -27,7 +30,7 @@ This folder contains source and header file which facilitate the debugging proce
 This folder contains source and header file for the boot process of the freedom board.
 
 **Folder source:** 
-This folder contains source files which are common to all targets and are compiled based on the macro definitions. The application is made
+This folder contains source files which are common to all build configurations and are compiled based on the macro definitions. The application is made
 modular by defining multiple source files. The PES Project 4.c is defined here, which has the main() function and  is compiled 
 for all targets.
 
@@ -49,8 +52,8 @@ The file `unitTestResults.out` has the output of the unit tests captured in it.
 All the code in this repository should be executed using the following command:  
 `make -r -j3 "target"`  
 Where, "target" has three choices
-- *Debug*: This target builds the output for the KL25Z.The output LEDs will change according to the states and the messages will be logged.   
-- *Normal*: This target builds the output for the KL25Z. The output LEDs will change according to the state changes, and a log output is displayed.
+- *Debug*: This target builds the output for the KL25Z. The output LEDs will change according to the states and the messages will be logged.   
+- *Normal*: This target builds the output for the KL25Z. The output LEDs will change according to the state changes, and a log output is displayed (The temperature read, and the average calculated, as required).
 - *Test*: This target builds the output for the PC. This target logs messages after executing uCUnit test cases. 
 
    
@@ -65,6 +68,8 @@ This project has the following requirements, that are fulfilled using the aforem
 
 **Issues faced**  
 Tried the interrupt based approach for I2C communication with the temperature sensor, ran into some errors. So, switched to polling approach to read the temperature. Ran into errors while reading the THIGH register and realised that we had not put a WAIT signal after writing to TLOW and before writing to THIGH. 
+
+
 
 
 
