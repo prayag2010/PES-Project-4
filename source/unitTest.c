@@ -95,5 +95,8 @@ void unitTest(void)
 	greenLED();
 	//End testing and write summary
 	UCUNIT_WriteSummary();
+
+	resetSysTick();
+
 	UCUNIT_Shutdown();
 }

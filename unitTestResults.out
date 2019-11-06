@@ -1,0 +1,75 @@
+P&E Semihosting Console
+
+TEST: i2c_master_init: I2C registers initialised
+TEST: start: Temperature Sensor detected
+TEST: start: TLOW registers initialised
+TEST: start: THIGH registers initialised
+TEST: read_temp: Reading Temperature
+TEST: Init_RGB_LEDs: Initialising LEDs
+TEST: ledOff: Switching off LEDs
+Init of hardware finished.
+
+======================================
+Unit test on I2C and Temperature Sensor
+======================================
+Checking if POST is passed
+TEST: start: Temperature Sensor detected
+TEST: read_temp: Reading Temperature
+../source/unitTest.c:38: passed:IsEqual(postCheck,true)
+Checking if the sensor is reading the current temperature
+TEST: start: Temperature Sensor detected
+TEST: read_temp: Reading Temperature
+../source/unitTest.c:44: failed:IsEqual(temperature,23)
+Checking if the sensor is disconnected
+TEST: start: Temperature Sensor detected
+TEST: read_temp: Reading Temperature
+../source/unitTest.c:50: failed:IsEqual(temperature,0xFFFF)
+Checking if the KL25Z is in I2C transmit mode
+TEST: start: Temperature Sensor detected
+TEST: read_temp: Reading Temperature
+../source/unitTest.c:56: failed:IsEqual((I2C1->C1 & I2C_C1_TX_MASK),I2C_C1_TX_MASK)
+Checking if the temperature variable is 16 bit
+../source/unitTest.c:60: passed:Is16Bit(tempR)
+Checking the tracepoint in tempRead state
+TEST: ledOff: Switching off LEDs
+TEST: ledOff: Switching off LEDs
+TEST: greenLED: Turning on Green LED
+TEST: start: Temperature Sensor detected
+TEST: read_temp: Reading Temperature
+tempReadState 25
+../source/unitTest.c:66: passed:TracepointCoverage(0)
+Checking the tracepoint in Alert state
+TEST: ledOff: Switching off LEDs
+TEST: ledOff: Switching off LEDs
+TEST: blueLED: Turning on Blue LED
+TEST: start: Temperature Sensor detected
+TEST: read_temp: Reading Temperature
+../source/unitTest.c:72: passed:TracepointCoverage(1)
+Checking the tracepoint in avgWaitState state
+TEST: ledOff: Switching off LEDs
+TEST: ledOff: Switching off LEDs
+TEST: greenLED: Turning on Green LED
+TEST: start: Temperature Sensor detected
+TEST: read_temp: Reading Temperature
+Average: 25
+SYSTICK, 15 seconds completed
+avgWaitState
+Counter: 1
+../source/unitTest.c:78: passed:TracepointCoverage(2)
+Checking the tracepoint in disconnected state
+disconnectState
+../source/unitTest.c:84: passed:TracepointCoverage(3)
+Checking the tracepoint in Error state
+TEST: errorState: State machine return value error, going back to getTemp state
+../source/unitTest.c:91: passed:TracepointCoverage(4)
+TEST: ledOff: Switching off LEDs
+TEST: ledOff: Switching off LEDs
+TEST: greenLED: Turning on Green LED
+
+**************************************
+Testcases: failed: 0
+           passed: 0
+Checks:    failed: 3
+           passed: 7
+**************************************
+System shutdown.

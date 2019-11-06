@@ -1,7 +1,14 @@
+core_cm0plus.h:804:22:NVIC_SetPriority	24	static
 stateFunctions.c:65:6:smallDelay	16	static
 stateFunctions.c:71:6:endProgram	8	static
 stateFunctions.c:89:17:tempReadState	8	static
 stateFunctions.c:135:17:tempAlertState	8	static
 stateFunctions.c:165:17:avgWaitState	8	static
 stateFunctions.c:219:17:disconnectState	8	static
-stateFunctions.c:232:17:errorState	8	static
+stateFunctions.c:234:17:errorState	8	static
+stateFunctions.c:252:6:initPortD	8	static
+stateFunctions.c:268:6:resetSysTick	8	static
+stateFunctions.c:281:6:startSysTick	8	static
+stateFunctions.c:288:6:Init_SysTick	8	static
+stateFunctions.c:299:6:PORTD_IRQHandler	8	static
+stateFunctions.c:313:6:SysTick_Handler	8	static

@@ -1,4 +1,4 @@
-stateFunctions.c:232:17:errorState	16	static
+stateFunctions.c:234:17:errorState	16	static
 stateFunctions.c:135:17:tempAlertState	16	static
 stateFunctions.c:165:17:avgWaitState	24	static
 stateFunctions.c:89:17:tempReadState	16	static

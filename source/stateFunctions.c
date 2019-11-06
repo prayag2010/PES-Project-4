@@ -225,7 +225,7 @@ enum eventCodes disconnectState(void)
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
 	printf("disconnectState\n");
 	//end the program
-#ifndef debug
+#ifndef test
 	endProgram();
 #endif
 	return errorEvent;
@@ -245,4 +245,82 @@ enum eventCodes errorState(void)
 	log_message(NORMAL, __func__, "State machine return value error, going back to getTemp state");
 	//go back to average wait
 	return completeEvent;
+}
+
+
+//Initialize the PD5 pin to GPIO high level based interrupt
+void initPortD(void)
+{
+	//enable port D clock
+	SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
+
+	//Initialize the PD5 pin to GPIO high level based interrupt
+	PORTD->PCR[5] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_MUX(1) | \
+			PORT_PCR_IRQC(0xC);
+
+	//Clear the interrupt mask
+	PORTD->PCR[5] |= PORT_PCR_ISF_MASK;
+	//Enable port D interrupt
+	NVIC->ISER[0] |= (1 << PORTD_IRQn);
+}
+
+//Reset the systick timer
+void resetSysTick(void)
+{
+	//Disable the systick
+	SysTick->CTRL &= ~(SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk);
+	//Load value eq to 15 sec
+	SysTick->LOAD = sec3;
+	//set the value register to 0
+	SysTick->VAL = 0;
+	//reset flag
+	delayCompleted = false;
+}
+
+//start the systick timer
+void startSysTick(void)
+{
+	//Enable and start the timer
+	SysTick->CTRL = SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
+}
+
+
+void Init_SysTick(void)
+{
+	//Load value eq to 15 sec
+	SysTick->LOAD = sec3;
+	//Set the systick timer priority
+	NVIC_SetPriority(SysTick_IRQn, 3);
+	//set the value register to 0
+	SysTick->VAL = 0;
+}
+
+
+void PORTD_IRQHandler(void)
+{
+	//Clear the interrupt mask
+	PORTD->PCR[5] |= PORT_PCR_ISF_MASK;
+	//disable the interrupt
+	NVIC->ICER[0] |= (1 << PORTD_IRQn);
+
+	printf("Entered port interrupt, disabling IRQ\n");
+	printf("ALERT ALERT ALERT ALERT ALERT ALERT\n");
+	//set user mask
+	alertAddressed = false;
+
+}
+
+void SysTick_Handler(void)
+{
+	//increment counter variable
+	sysTickCounter++;
+	//execute if the timer is used twice
+	if(sysTickCounter > 1)
+	{
+		//reset counter
+		sysTickCounter = 0;
+		printf("SYSTICK, 15 seconds completed\n");
+		//set flags
+		delayCompleted = true;
+	}
 }
