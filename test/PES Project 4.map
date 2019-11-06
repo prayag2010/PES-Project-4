@@ -213,8 +213,6 @@ Discarded input sections
                 0x0000000000000000       0x14 ./source/loggerFunctions.o
  .text.log_data
                 0x0000000000000000       0x64 ./source/loggerFunctions.o
- .text.log_message_int
-                0x0000000000000000       0x4c ./source/loggerFunctions.o
  .text.log_string
                 0x0000000000000000       0x2c ./source/loggerFunctions.o
  .text.log_integer
@@ -733,7 +731,7 @@ END GROUP
                 0x0000000020003000                __top_SRAM = 0x20003000
                 0x0000000020003000                __top_RAM = 0x20003000
 
-.text           0x0000000000000000     0x3d6c
+.text           0x0000000000000000     0x3c0c
  FILL mask 0xff
                 0x0000000000000000                __vectors_start__ = ABSOLUTE (.)
  *(SORT_BY_ALIGNMENT(.isr_vector))
@@ -743,13 +741,13 @@ END GROUP
                 0x00000000000000c0                . = ALIGN (0x4)
                 0x00000000000000c0                __section_table_start = .
                 0x00000000000000c0                __data_section_table = .
-                0x00000000000000c0        0x4 LONG 0x3d6c LOADADDR (.data)
+                0x00000000000000c0        0x4 LONG 0x3c0c LOADADDR (.data)
                 0x00000000000000c4        0x4 LONG 0x1ffff080 ADDR (.data)
                 0x00000000000000c8        0x4 LONG 0x30 SIZEOF (.data)
                 0x00000000000000cc                __data_section_table_end = .
                 0x00000000000000cc                __bss_section_table = .
                 0x00000000000000cc        0x4 LONG 0x1ffff0b0 ADDR (.bss)
-                0x00000000000000d0        0x4 LONG 0x10c SIZEOF (.bss)
+                0x00000000000000d0        0x4 LONG 0x114 SIZEOF (.bss)
                 0x00000000000000d4                __bss_section_table_end = .
                 0x00000000000000d4                __section_table_end = .
  *(SORT_BY_ALIGNMENT(.after_vectors*))
@@ -840,293 +838,298 @@ END GROUP
                 0x0000000000000410                PROVIDE (__FLASH_CONFIG_END__ = .)
                 0x0000000000000001                ASSERT (! ((__FLASH_CONFIG_START__ == __FLASH_CONFIG_END__)), Linker Flash Config Support Enabled, but no .FlashConfig section provided within application)
  *(SORT_BY_ALIGNMENT(.text*))
- .text.main     0x0000000000000410      0x1ec ./source/PES Project 4.o
+ .text.main     0x0000000000000410      0x19c ./source/PES Project 4.o
                 0x0000000000000410                main
  .text.System_Init
-                0x00000000000005fc       0x18 ./source/System.o
-                0x00000000000005fc                System_Init
+                0x00000000000005ac       0x18 ./source/System.o
+                0x00000000000005ac                System_Init
  .text.System_Shutdown
-                0x0000000000000614       0x1c ./source/System.o
-                0x0000000000000614                System_Shutdown
+                0x00000000000005c4       0x1c ./source/System.o
+                0x00000000000005c4                System_Shutdown
  .text.System_Safestate
-                0x0000000000000630       0x1c ./source/System.o
-                0x0000000000000630                System_Safestate
+                0x00000000000005e0       0x1c ./source/System.o
+                0x00000000000005e0                System_Safestate
  .text.System_WriteInt
-                0x000000000000064c       0x20 ./source/System.o
-                0x000000000000064c                System_WriteInt
+                0x00000000000005fc       0x20 ./source/System.o
+                0x00000000000005fc                System_WriteInt
  .text.i2c_master_init
-                0x000000000000066c       0xa0 ./source/i2c.o
-                0x000000000000066c                i2c_master_init
- .text.start    0x000000000000070c      0x298 ./source/i2c.o
-                0x000000000000070c                start
+                0x000000000000061c       0xa0 ./source/i2c.o
+                0x000000000000061c                i2c_master_init
+ .text.start    0x00000000000006bc      0x28c ./source/i2c.o
+                0x00000000000006bc                start
  .text.read_temp
-                0x00000000000009a4      0x214 ./source/i2c.o
-                0x00000000000009a4                read_temp
+                0x0000000000000948      0x214 ./source/i2c.o
+                0x0000000000000948                read_temp
  .text.Init_RGB_LEDs
-                0x0000000000000bb8       0xc0 ./source/ledControl.o
-                0x0000000000000bb8                Init_RGB_LEDs
- .text.ledOff   0x0000000000000c78       0x54 ./source/ledControl.o
-                0x0000000000000c78                ledOff
- .text.redLED   0x0000000000000ccc       0x48 ./source/ledControl.o
-                0x0000000000000ccc                redLED
+                0x0000000000000b5c       0xb4 ./source/ledControl.o
+                0x0000000000000b5c                Init_RGB_LEDs
+ .text.ledOff   0x0000000000000c10       0x3c ./source/ledControl.o
+                0x0000000000000c10                ledOff
+ .text.redLED   0x0000000000000c4c       0x30 ./source/ledControl.o
+                0x0000000000000c4c                redLED
  .text.greenLED
-                0x0000000000000d14       0x48 ./source/ledControl.o
-                0x0000000000000d14                greenLED
- .text.blueLED  0x0000000000000d5c       0x44 ./source/ledControl.o
-                0x0000000000000d5c                blueLED
+                0x0000000000000c7c       0x30 ./source/ledControl.o
+                0x0000000000000c7c                greenLED
+ .text.blueLED  0x0000000000000cac       0x2c ./source/ledControl.o
+                0x0000000000000cac                blueLED
  .text.log_message
-                0x0000000000000da0       0x4c ./source/loggerFunctions.o
-                0x0000000000000da0                log_message
+                0x0000000000000cd8       0x4c ./source/loggerFunctions.o
+                0x0000000000000cd8                log_message
+ .text.log_message_int
+                0x0000000000000d24       0x4c ./source/loggerFunctions.o
+                0x0000000000000d24                log_message_int
  .text.HardFault_Handler
-                0x0000000000000dec       0x30 ./source/semihost_hardfault.o
-                0x0000000000000dec                HardFault_Handler
+                0x0000000000000d70       0x30 ./source/semihost_hardfault.o
+                0x0000000000000d70                HardFault_Handler
  .text.NVIC_SetPriority
-                0x0000000000000e1c       0xdc ./source/stateFunctions.o
+                0x0000000000000da0       0xdc ./source/stateFunctions.o
  .text.smallDelay
-                0x0000000000000ef8       0x28 ./source/stateFunctions.o
-                0x0000000000000ef8                smallDelay
+                0x0000000000000e7c       0x28 ./source/stateFunctions.o
+                0x0000000000000e7c                smallDelay
  .text.endProgram
-                0x0000000000000f20       0x40 ./source/stateFunctions.o
-                0x0000000000000f20                endProgram
+                0x0000000000000ea4       0x40 ./source/stateFunctions.o
+                0x0000000000000ea4                endProgram
  .text.tempReadState
-                0x0000000000000f60      0x104 ./source/stateFunctions.o
-                0x0000000000000f60                tempReadState
+                0x0000000000000ee4       0xf4 ./source/stateFunctions.o
+                0x0000000000000ee4                tempReadState
  .text.tempAlertState
-                0x0000000000001064       0xa4 ./source/stateFunctions.o
-                0x0000000000001064                tempAlertState
+                0x0000000000000fd8       0x98 ./source/stateFunctions.o
+                0x0000000000000fd8                tempAlertState
  .text.avgWaitState
-                0x0000000000001108      0x168 ./source/stateFunctions.o
-                0x0000000000001108                avgWaitState
+                0x0000000000001070      0x14c ./source/stateFunctions.o
+                0x0000000000001070                avgWaitState
  .text.disconnectState
-                0x0000000000001270       0x4c ./source/stateFunctions.o
-                0x0000000000001270                disconnectState
+                0x00000000000011bc       0x4c ./source/stateFunctions.o
+                0x00000000000011bc                disconnectState
  .text.errorState
-                0x00000000000012bc       0x68 ./source/stateFunctions.o
-                0x00000000000012bc                errorState
+                0x0000000000001208       0x5c ./source/stateFunctions.o
+                0x0000000000001208                errorState
  .text.initPortD
-                0x0000000000001324       0x54 ./source/stateFunctions.o
-                0x0000000000001324                initPortD
+                0x0000000000001264       0x54 ./source/stateFunctions.o
+                0x0000000000001264                initPortD
  .text.resetSysTick
-                0x0000000000001378       0x34 ./source/stateFunctions.o
-                0x0000000000001378                resetSysTick
+                0x00000000000012b8       0x34 ./source/stateFunctions.o
+                0x00000000000012b8                resetSysTick
  .text.startSysTick
-                0x00000000000013ac       0x14 ./source/stateFunctions.o
-                0x00000000000013ac                startSysTick
+                0x00000000000012ec       0x14 ./source/stateFunctions.o
+                0x00000000000012ec                startSysTick
  .text.Init_SysTick
-                0x00000000000013c0       0x2c ./source/stateFunctions.o
-                0x00000000000013c0                Init_SysTick
+                0x0000000000001300       0x2c ./source/stateFunctions.o
+                0x0000000000001300                Init_SysTick
  .text.PORTD_IRQHandler
-                0x00000000000013ec       0x54 ./source/stateFunctions.o
-                0x00000000000013ec                PORTD_IRQHandler
+                0x000000000000132c       0x3c ./source/stateFunctions.o
+                0x000000000000132c                PORTD_IRQHandler
  .text.SysTick_Handler
-                0x0000000000001440       0x3c ./source/stateFunctions.o
-                0x0000000000001440                SysTick_Handler
+                0x0000000000001368       0x44 ./source/stateFunctions.o
+                0x0000000000001368                SysTick_Handler
  .text.unitTest
-                0x000000000000147c      0x930 ./source/unitTest.o
-                0x000000000000147c                unitTest
+                0x00000000000013ac      0x930 ./source/unitTest.o
+                0x00000000000013ac                unitTest
  .text.SystemInit
-                0x0000000000001dac       0x18 ./CMSIS/system_MKL25Z4.o
-                0x0000000000001dac                SystemInit
- .text._initio  0x0000000000001dc4       0x7c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(initio.o)
-                0x0000000000001dc4                _initio
+                0x0000000000001cdc       0x18 ./CMSIS/system_MKL25Z4.o
+                0x0000000000001cdc                SystemInit
+ .text._initio  0x0000000000001cf4       0x7c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(initio.o)
+                0x0000000000001cf4                _initio
  .text.__vfprintf
-                0x0000000000001e40      0xcd8 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
-                0x0000000000001e40                __vfprintf
+                0x0000000000001d70      0xcd8 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
+                0x0000000000001d70                __vfprintf
  .text._vsnprintf
-                0x0000000000002b18       0x70 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
-                0x0000000000002b18                _vsnprintf
- .text._printf  0x0000000000002b88       0x50 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
-                0x0000000000002b88                _printf
- .text.setvbuf  0x0000000000002bd8       0x4c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(setvbuf.o)
-                0x0000000000002bd8                setvbuf
- .text.strlen   0x0000000000002c24       0x58 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(strlen.o)
-                0x0000000000002c24                strlen
+                0x0000000000002a48       0x70 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
+                0x0000000000002a48                _vsnprintf
+ .text._printf  0x0000000000002ab8       0x50 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
+                0x0000000000002ab8                _printf
+ .text.setvbuf  0x0000000000002b08       0x4c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(setvbuf.o)
+                0x0000000000002b08                setvbuf
+ .text.strlen   0x0000000000002b54       0x58 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(strlen.o)
+                0x0000000000002b54                strlen
  .text._deferredlazyseek
-                0x0000000000002c7c       0x40 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_deferredlazyseek.o)
-                0x0000000000002c7c                _deferredlazyseek
+                0x0000000000002bac       0x40 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_deferredlazyseek.o)
+                0x0000000000002bac                _deferredlazyseek
  .text.__flsbuf
-                0x0000000000002cbc      0x14c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_deferredlazyseek.o)
-                0x0000000000002cbc                __flsbuf
- .text._fdopen  0x0000000000002e08       0x74 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_fdopen.o)
-                0x0000000000002e08                _fdopen
- .text._fflush  0x0000000000002e7c       0x5c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_fflush.o)
-                0x0000000000002e7c                _fflush
+                0x0000000000002bec      0x14c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_deferredlazyseek.o)
+                0x0000000000002bec                __flsbuf
+ .text._fdopen  0x0000000000002d38       0x74 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_fdopen.o)
+                0x0000000000002d38                _fdopen
+ .text._fflush  0x0000000000002dac       0x5c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_fflush.o)
+                0x0000000000002dac                _fflush
  .text._Cwritebuf
-                0x0000000000002ed8       0x68 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_writebuf.o)
-                0x0000000000002ed8                _Cwritebuf
- .text.malloc   0x0000000000002f40       0xcc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(alloc.o)
-                0x0000000000002f40                malloc
+                0x0000000000002e08       0x68 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_writebuf.o)
+                0x0000000000002e08                _Cwritebuf
+ .text.malloc   0x0000000000002e70       0xcc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(alloc.o)
+                0x0000000000002e70                malloc
  .text._Csys_alloc
-                0x000000000000300c       0x20 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(alloc.o)
-                0x000000000000300c                _Csys_alloc
- .text.fclose   0x000000000000302c       0x5c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(fclose.o)
-                0x000000000000302c                fclose
- .text.fflush   0x0000000000003088       0x44 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(fflush.o)
-                0x0000000000003088                fflush
- .text.fseek    0x00000000000030cc       0xf0 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(fseek.o)
-                0x00000000000030cc                fseek
- .text.ftell    0x00000000000031bc       0x48 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(ftell.o)
-                0x00000000000031bc                ftell
- .text._sbrk    0x0000000000003204       0x40 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_cr_sbrk.o)
-                0x0000000000003204                _sbrk
+                0x0000000000002f3c       0x20 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(alloc.o)
+                0x0000000000002f3c                _Csys_alloc
+ .text.fclose   0x0000000000002f5c       0x5c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(fclose.o)
+                0x0000000000002f5c                fclose
+ .text.fflush   0x0000000000002fb8       0x44 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(fflush.o)
+                0x0000000000002fb8                fflush
+ .text.fseek    0x0000000000002ffc       0xf0 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(fseek.o)
+                0x0000000000002ffc                fseek
+ .text.ftell    0x00000000000030ec       0x48 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(ftell.o)
+                0x00000000000030ec                ftell
+ .text._sbrk    0x0000000000003134       0x40 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_cr_sbrk.o)
+                0x0000000000003134                _sbrk
  .text._do_fflush
-                0x0000000000003244       0x44 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_do_fflush.o)
-                0x0000000000003244                _do_fflush
+                0x0000000000003174       0x44 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_do_fflush.o)
+                0x0000000000003174                _do_fflush
  .text.__check_heap_overflow
-                0x0000000000003288       0x14 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_cr_check_heap.o)
-                0x0000000000003288                __check_heap_overflow
+                0x00000000000031b8       0x14 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(_cr_check_heap.o)
+                0x00000000000031b8                __check_heap_overflow
  .text.__sys_appexit
-                0x000000000000329c        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_appexit.o)
-                0x000000000000329c                __exit
-                0x000000000000329c                __sys_appexit
+                0x00000000000031cc        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_appexit.o)
+                0x00000000000031cc                __exit
+                0x00000000000031cc                __sys_appexit
  .text.System_exit
-                0x00000000000032a8        0xc ./source/System.o
-                0x00000000000032a8                System_exit
+                0x00000000000031d8        0xc ./source/System.o
+                0x00000000000031d8                System_exit
  .text.System_WriteString
-                0x00000000000032b4       0x18 ./source/System.o
-                0x00000000000032b4                System_WriteString
- .text.__main   0x00000000000032cc        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(_cr__main.o)
-                0x00000000000032cc                __main
-                0x00000000000032cc                __CR_SEMIHOST
+                0x00000000000031e4       0x18 ./source/System.o
+                0x00000000000031e4                System_WriteString
+ .text.__main   0x00000000000031fc        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(_cr__main.o)
+                0x00000000000031fc                __main
+                0x00000000000031fc                __CR_SEMIHOST
  .text.no_fp_display
-                0x00000000000032d8        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
- .text.memset   0x00000000000032dc        0x8 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(memset.o)
-                0x00000000000032dc                memset
- .text.free     0x00000000000032e4       0x2c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(alloc.o)
-                0x00000000000032e4                free
- .text.remove   0x0000000000003310       0x12 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(remove.o)
-                0x0000000000003310                remove
+                0x0000000000003208        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
+ .text.memset   0x000000000000320c        0x8 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(memset.o)
+                0x000000000000320c                memset
+ .text.free     0x0000000000003214       0x2c /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(alloc.o)
+                0x0000000000003214                free
+ .text.remove   0x0000000000003240       0x12 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(remove.o)
+                0x0000000000003240                remove
  .text.__aeabi_division_idivmod
-                0x0000000000003322       0x78 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v6-m/nofp/libcr_eabihelpers.a(division_32.o)
-                0x0000000000003322                __aeabi_idiv
-                0x0000000000003322                __aeabi_idivmod
-                0x0000000000003328                __aeabi_uidiv
-                0x0000000000003328                __aeabi_uidivmod
+                0x0000000000003252       0x78 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v6-m/nofp/libcr_eabihelpers.a(division_32.o)
+                0x0000000000003252                __aeabi_idiv
+                0x0000000000003252                __aeabi_idivmod
+                0x0000000000003258                __aeabi_uidiv
+                0x0000000000003258                __aeabi_uidivmod
  .text.__aeabi_division_idiv0
-                0x000000000000339a        0x2 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v6-m/nofp/libcr_eabihelpers.a(division_idiv0.o)
-                0x000000000000339a                __aeabi_idiv0
+                0x00000000000032ca        0x2 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v6-m/nofp/libcr_eabihelpers.a(division_idiv0.o)
+                0x00000000000032ca                __aeabi_idiv0
  .text.__aeabi_llong_lmul
-                0x000000000000339c       0x2e /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v6-m/nofp/libcr_eabihelpers.a(llong.o)
-                0x000000000000339c                __aeabi_lmul
+                0x00000000000032cc       0x2e /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v6-m/nofp/libcr_eabihelpers.a(llong.o)
+                0x00000000000032cc                __aeabi_lmul
  .text.__aeabi_memset_lowlevel
-                0x00000000000033ca       0x2a /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v6-m/nofp/libcr_eabihelpers.a(memcpy.o)
-                0x00000000000033ca                __aeabi_lowlevel_memset
+                0x00000000000032fa       0x2a /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v6-m/nofp/libcr_eabihelpers.a(memcpy.o)
+                0x00000000000032fa                __aeabi_lowlevel_memset
  .text.__sys_close
-                0x00000000000033f4        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_close.o)
-                0x00000000000033f4                __sys_close
+                0x0000000000003324        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_close.o)
+                0x0000000000003324                __sys_close
  .text.__sys_flen
-                0x0000000000003400        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_flen.o)
-                0x0000000000003400                __sys_flen
+                0x0000000000003330        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_flen.o)
+                0x0000000000003330                __sys_flen
  .text.__sys_istty
-                0x000000000000340c        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_istty.o)
-                0x000000000000340c                __sys_istty
+                0x000000000000333c        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_istty.o)
+                0x000000000000333c                __sys_istty
  .text.__sys_remove
-                0x0000000000003418        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_remove.o)
-                0x0000000000003418                __sys_remove
+                0x0000000000003348        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_remove.o)
+                0x0000000000003348                __sys_remove
  .text.__sys_seek
-                0x0000000000003424        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_seek.o)
-                0x0000000000003424                __sys_seek
+                0x0000000000003354        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_seek.o)
+                0x0000000000003354                __sys_seek
  .text.__sys_tmpnam
-                0x0000000000003430        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_tmpnam.o)
-                0x0000000000003430                __sys_tmpnam
+                0x0000000000003360        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_tmpnam.o)
+                0x0000000000003360                __sys_tmpnam
  .text.__sys_write
-                0x000000000000343c        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_write.o)
-                0x000000000000343c                __sys_write
+                0x000000000000336c        0xc /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__sys_write.o)
+                0x000000000000336c                __sys_write
  *(SORT_BY_ALIGNMENT(.rodata) SORT_BY_ALIGNMENT(.rodata.*) SORT_BY_ALIGNMENT(.constdata) SORT_BY_ALIGNMENT(.constdata.*))
- .rodata        0x0000000000003448       0x9e ./source/PES Project 4.o
- *fill*         0x00000000000034e6        0x2 ff
- .rodata.main   0x00000000000034e8       0x14 ./source/PES Project 4.o
- .rodata.__func__.4982
-                0x00000000000034fc        0x5 ./source/PES Project 4.o
- *fill*         0x0000000000003501        0x3 ff
- .rodata        0x0000000000003504       0x57 ./source/System.o
- *fill*         0x000000000000355b        0x1 ff
- .rodata        0x000000000000355c       0xaa ./source/i2c.o
- *fill*         0x0000000000003606        0x2 ff
- .rodata.__func__.4900
-                0x0000000000003608       0x10 ./source/i2c.o
- .rodata.__func__.4906
-                0x0000000000003618        0x6 ./source/i2c.o
- *fill*         0x000000000000361e        0x2 ff
- .rodata.__func__.4937
-                0x0000000000003620        0xa ./source/i2c.o
- *fill*         0x000000000000362a        0x2 ff
- .rodata        0x000000000000362c       0x68 ./source/ledControl.o
- .rodata.__func__.4723
-                0x0000000000003694        0xe ./source/ledControl.o
- *fill*         0x00000000000036a2        0x2 ff
- .rodata.__func__.4726
-                0x00000000000036a4        0x7 ./source/ledControl.o
- *fill*         0x00000000000036ab        0x1 ff
- .rodata.__func__.4729
-                0x00000000000036ac        0x7 ./source/ledControl.o
- *fill*         0x00000000000036b3        0x1 ff
- .rodata.__func__.4732
-                0x00000000000036b4        0x9 ./source/ledControl.o
- *fill*         0x00000000000036bd        0x3 ff
- .rodata.__func__.4735
-                0x00000000000036c0        0x8 ./source/ledControl.o
- .rodata        0x00000000000036c8       0x2c ./source/loggerFunctions.o
- .rodata        0x00000000000036f4      0x217 ./source/stateFunctions.o
- *fill*         0x000000000000390b        0x1 ff
- .rodata.__func__.4999
-                0x000000000000390c        0xb ./source/stateFunctions.o
- *fill*         0x0000000000003917        0x1 ff
- .rodata.__func__.5004
-                0x0000000000003918        0xe ./source/stateFunctions.o
- *fill*         0x0000000000003926        0x2 ff
- .rodata.__func__.5008
-                0x0000000000003928        0xf ./source/stateFunctions.o
- *fill*         0x0000000000003937        0x1 ff
- .rodata.__func__.5012
-                0x0000000000003938        0xd ./source/stateFunctions.o
- *fill*         0x0000000000003945        0x3 ff
- .rodata.__func__.5019
-                0x0000000000003948       0x10 ./source/stateFunctions.o
- .rodata.__func__.5023
-                0x0000000000003958        0xb ./source/stateFunctions.o
- *fill*         0x0000000000003963        0x1 ff
- .rodata        0x0000000000003964      0x3ad ./source/unitTest.o
- *fill*         0x0000000000003d11        0x3 ff
+ .rodata        0x0000000000003378       0x7a ./source/PES Project 4.o
+ *fill*         0x00000000000033f2        0x2 ff
+ .rodata.main   0x00000000000033f4       0x14 ./source/PES Project 4.o
+ .rodata.__func__.4984
+                0x0000000000003408        0x5 ./source/PES Project 4.o
+ *fill*         0x000000000000340d        0x3 ff
+ .rodata        0x0000000000003410       0x57 ./source/System.o
+ *fill*         0x0000000000003467        0x1 ff
+ .rodata        0x0000000000003468       0xaa ./source/i2c.o
+ *fill*         0x0000000000003512        0x2 ff
+ .rodata.__func__.4901
+                0x0000000000003514       0x10 ./source/i2c.o
+ .rodata.__func__.4907
+                0x0000000000003524        0x6 ./source/i2c.o
+ *fill*         0x000000000000352a        0x2 ff
+ .rodata.__func__.4938
+                0x000000000000352c        0xa ./source/i2c.o
+ *fill*         0x0000000000003536        0x2 ff
+ .rodata        0x0000000000003538       0x68 ./source/ledControl.o
+ .rodata.__func__.4724
+                0x00000000000035a0        0xe ./source/ledControl.o
+ *fill*         0x00000000000035ae        0x2 ff
+ .rodata.__func__.4727
+                0x00000000000035b0        0x7 ./source/ledControl.o
+ *fill*         0x00000000000035b7        0x1 ff
+ .rodata.__func__.4730
+                0x00000000000035b8        0x7 ./source/ledControl.o
+ *fill*         0x00000000000035bf        0x1 ff
+ .rodata.__func__.4733
+                0x00000000000035c0        0x9 ./source/ledControl.o
+ *fill*         0x00000000000035c9        0x3 ff
+ .rodata.__func__.4736
+                0x00000000000035cc        0x8 ./source/ledControl.o
+ .rodata        0x00000000000035d4       0x2c ./source/loggerFunctions.o
+ .rodata        0x0000000000003600      0x19b ./source/stateFunctions.o
+ *fill*         0x000000000000379b        0x1 ff
+ .rodata.__func__.5002
+                0x000000000000379c        0xb ./source/stateFunctions.o
+ *fill*         0x00000000000037a7        0x1 ff
+ .rodata.__func__.5007
+                0x00000000000037a8        0xe ./source/stateFunctions.o
+ *fill*         0x00000000000037b6        0x2 ff
+ .rodata.__func__.5011
+                0x00000000000037b8        0xf ./source/stateFunctions.o
+ *fill*         0x00000000000037c7        0x1 ff
+ .rodata.__func__.5015
+                0x00000000000037c8        0xd ./source/stateFunctions.o
+ *fill*         0x00000000000037d5        0x3 ff
+ .rodata.__func__.5022
+                0x00000000000037d8       0x10 ./source/stateFunctions.o
+ .rodata.__func__.5026
+                0x00000000000037e8        0xb ./source/stateFunctions.o
+ *fill*         0x00000000000037f3        0x1 ff
+ .rodata.__func__.5045
+                0x00000000000037f4       0x10 ./source/stateFunctions.o
+ .rodata        0x0000000000003804      0x3ad ./source/unitTest.o
+ *fill*         0x0000000000003bb1        0x3 ff
  .rodata.__num_Ciob_streams
-                0x0000000000003d14        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__ciob.o)
-                0x0000000000003d14                __num_Ciob_streams
+                0x0000000000003bb4        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__ciob.o)
+                0x0000000000003bb4                __num_Ciob_streams
  .rodata._initio.str1.1
-                0x0000000000003d18        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(initio.o)
+                0x0000000000003bb8        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(initio.o)
  .rodata.__vfprintf.str1.1
-                0x0000000000003d1c       0x37 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
+                0x0000000000003bbc       0x37 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(printf.o)
                                          0x38 (size before relaxing)
  .rodata._Csys_alloc.str1.1
-                0x0000000000003d53       0x18 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(alloc.o)
-                0x0000000000003d6c                . = ALIGN (0x4)
- *fill*         0x0000000000003d6b        0x1 ff
+                0x0000000000003bf3       0x18 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(alloc.o)
+                0x0000000000003c0c                . = ALIGN (0x4)
+ *fill*         0x0000000000003c0b        0x1 ff
 
-.glue_7         0x0000000000003d6c        0x0
- .glue_7        0x0000000000003d6c        0x0 linker stubs
+.glue_7         0x0000000000003c0c        0x0
+ .glue_7        0x0000000000003c0c        0x0 linker stubs
 
-.glue_7t        0x0000000000003d6c        0x0
- .glue_7t       0x0000000000003d6c        0x0 linker stubs
+.glue_7t        0x0000000000003c0c        0x0
+ .glue_7t       0x0000000000003c0c        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000003d6c        0x0
- .vfp11_veneer  0x0000000000003d6c        0x0 linker stubs
+.vfp11_veneer   0x0000000000003c0c        0x0
+ .vfp11_veneer  0x0000000000003c0c        0x0 linker stubs
 
-.v4_bx          0x0000000000003d6c        0x0
- .v4_bx         0x0000000000003d6c        0x0 linker stubs
+.v4_bx          0x0000000000003c0c        0x0
+ .v4_bx         0x0000000000003c0c        0x0 linker stubs
 
-.iplt           0x0000000000003d6c        0x0
- .iplt          0x0000000000003d6c        0x0 ./startup/startup_mkl25z4.o
+.iplt           0x0000000000003c0c        0x0
+ .iplt          0x0000000000003c0c        0x0 ./startup/startup_mkl25z4.o
 
-.rel.dyn        0x0000000000003d6c        0x0
- .rel.iplt      0x0000000000003d6c        0x0 ./startup/startup_mkl25z4.o
+.rel.dyn        0x0000000000003c0c        0x0
+ .rel.iplt      0x0000000000003c0c        0x0 ./startup/startup_mkl25z4.o
 
 .ARM.extab
  *(SORT_BY_ALIGNMENT(.ARM.extab*) SORT_BY_ALIGNMENT(.gnu.linkonce.armextab.*))
-                0x0000000000003d6c                __exidx_start = .
+                0x0000000000003c0c                __exidx_start = .
 
 .ARM.exidx
  *(SORT_BY_ALIGNMENT(.ARM.exidx*) SORT_BY_ALIGNMENT(.gnu.linkonce.armexidx.*))
-                0x0000000000003d6c                __exidx_end = .
-                0x0000000000003d6c                _etext = .
+                0x0000000000003c0c                __exidx_end = .
+                0x0000000000003c0c                _etext = .
 
 .m_usb_data
  *(SORT_BY_ALIGNMENT(m_usb_bdt))
@@ -1144,7 +1147,7 @@ END GROUP
                 0x000000001ffff080                . = ALIGN (0x4)
                 0x000000001ffff080                _end_uninit_RESERVED = .
 
-.data           0x000000001ffff080       0x30 load address 0x0000000000003d6c
+.data           0x000000001ffff080       0x30 load address 0x0000000000003c0c
  FILL mask 0xff
                 0x000000001ffff080                _data = .
  *(SORT_BY_ALIGNMENT(vtable))
@@ -1161,19 +1164,17 @@ END GROUP
  .data.loggerEnable
                 0x000000001ffff0ad        0x1 ./source/stateFunctions.o
                 0x000000001ffff0ad                loggerEnable
- .data.stateTableActivated
-                0x000000001ffff0ae        0x1 ./source/stateFunctions.o
-                0x000000001ffff0ae                stateTableActivated
  .data.alertAddressed
-                0x000000001ffff0af        0x1 ./source/stateFunctions.o
-                0x000000001ffff0af                alertAddressed
+                0x000000001ffff0ae        0x1 ./source/stateFunctions.o
+                0x000000001ffff0ae                alertAddressed
                 0x000000001ffff0b0                . = ALIGN (0x4)
+ *fill*         0x000000001ffff0af        0x1 ff
                 0x000000001ffff0b0                _edata = .
 
-.igot.plt       0x000000001ffff0b0        0x0 load address 0x0000000000003d9c
+.igot.plt       0x000000001ffff0b0        0x0 load address 0x0000000000003c3c
  .igot.plt      0x000000001ffff0b0        0x0 ./startup/startup_mkl25z4.o
 
-.bss            0x000000001ffff0b0      0x10c load address 0x0000000000003d9c
+.bss            0x000000001ffff0b0      0x114 load address 0x0000000000003c3c
                 0x000000001ffff0b0                . = ALIGN (0x4)
                 0x000000001ffff0b0                _bss = .
  *(SORT_BY_ALIGNMENT(.bss*))
@@ -1187,107 +1188,114 @@ END GROUP
                 0x000000001ffff0b8                average
  .bss.tempSum   0x000000001ffff0bc        0x4 ./source/stateFunctions.o
                 0x000000001ffff0bc                tempSum
+ .bss.averageDiv
+                0x000000001ffff0c0        0x4 ./source/stateFunctions.o
+                0x000000001ffff0c0                averageDiv
  .bss.ucunit_checks_failed
-                0x000000001ffff0c0        0x4 ./source/unitTest.o
-                0x000000001ffff0c0                ucunit_checks_failed
- .bss.ucunit_checks_passed
                 0x000000001ffff0c4        0x4 ./source/unitTest.o
-                0x000000001ffff0c4                ucunit_checks_passed
- .bss.ucunit_testcases_failed
+                0x000000001ffff0c4                ucunit_checks_failed
+ .bss.ucunit_checks_passed
                 0x000000001ffff0c8        0x4 ./source/unitTest.o
-                0x000000001ffff0c8                ucunit_testcases_failed
- .bss.ucunit_testcases_passed
+                0x000000001ffff0c8                ucunit_checks_passed
+ .bss.ucunit_testcases_failed
                 0x000000001ffff0cc        0x4 ./source/unitTest.o
-                0x000000001ffff0cc                ucunit_testcases_passed
- .bss.ucunit_testcases_failed_checks
+                0x000000001ffff0cc                ucunit_testcases_failed
+ .bss.ucunit_testcases_passed
                 0x000000001ffff0d0        0x4 ./source/unitTest.o
-                0x000000001ffff0d0                ucunit_testcases_failed_checks
- .bss.ucunit_checklist_failed_checks
+                0x000000001ffff0d0                ucunit_testcases_passed
+ .bss.ucunit_testcases_failed_checks
                 0x000000001ffff0d4        0x4 ./source/unitTest.o
-                0x000000001ffff0d4                ucunit_checklist_failed_checks
- .bss.ucunit_action
+                0x000000001ffff0d4                ucunit_testcases_failed_checks
+ .bss.ucunit_checklist_failed_checks
                 0x000000001ffff0d8        0x4 ./source/unitTest.o
-                0x000000001ffff0d8                ucunit_action
+                0x000000001ffff0d8                ucunit_checklist_failed_checks
+ .bss.ucunit_action
+                0x000000001ffff0dc        0x4 ./source/unitTest.o
+                0x000000001ffff0dc                ucunit_action
  .bss.ucunit_checkpoints
-                0x000000001ffff0dc       0x18 ./source/unitTest.o
-                0x000000001ffff0dc                ucunit_checkpoints
+                0x000000001ffff0e0       0x18 ./source/unitTest.o
+                0x000000001ffff0e0                ucunit_checkpoints
  .bss.__end_of_heap
-                0x000000001ffff0f4        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(__init_alloc.o)
-                0x000000001ffff0f4                __end_of_heap
- .bss.__heaps   0x000000001ffff0f8        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(__init_alloc.o)
-                0x000000001ffff0f8                __heaps
- .bss.errno     0x000000001ffff0fc        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(errno.o)
-                0x000000001ffff0fc                errno
- .bss.__Ciob    0x000000001ffff100       0xb4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__ciob.o)
-                0x000000001ffff100                __Ciob
- .bss.tempR     0x000000001ffff1b4        0x2 ./source/stateFunctions.o
-                0x000000001ffff1b4                tempR
+                0x000000001ffff0f8        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(__init_alloc.o)
+                0x000000001ffff0f8                __end_of_heap
+ .bss.__heaps   0x000000001ffff0fc        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(__init_alloc.o)
+                0x000000001ffff0fc                __heaps
+ .bss.errno     0x000000001ffff100        0x4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_c.a(errno.o)
+                0x000000001ffff100                errno
+ .bss.__Ciob    0x000000001ffff104       0xb4 /Applications/MCUXpressoIDE_11.0.1_2563/ide/plugins/com.nxp.mcuxpresso.tools.macosx_11.0.1.201907311258/tools/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libcr_semihost_nf.a(__ciob.o)
+                0x000000001ffff104                __Ciob
+ .bss.tempR     0x000000001ffff1b8        0x2 ./source/stateFunctions.o
+                0x000000001ffff1b8                tempR
  .bss.setupOnce
-                0x000000001ffff1b6        0x1 ./source/i2c.o
-                0x000000001ffff1b6                setupOnce
- .bss.negative  0x000000001ffff1b7        0x1 ./source/i2c.o
-                0x000000001ffff1b7                negative
+                0x000000001ffff1ba        0x1 ./source/i2c.o
+                0x000000001ffff1ba                setupOnce
+ .bss.negative  0x000000001ffff1bb        0x1 ./source/i2c.o
+                0x000000001ffff1bb                negative
  .bss.postCheck
-                0x000000001ffff1b8        0x1 ./source/i2c.o
-                0x000000001ffff1b8                postCheck
+                0x000000001ffff1bc        0x1 ./source/i2c.o
+                0x000000001ffff1bc                postCheck
+ .bss.stateTableActivated
+                0x000000001ffff1bd        0x1 ./source/stateFunctions.o
+                0x000000001ffff1bd                stateTableActivated
  .bss.currentState
-                0x000000001ffff1b9        0x1 ./source/stateFunctions.o
-                0x000000001ffff1b9                currentState
+                0x000000001ffff1be        0x1 ./source/stateFunctions.o
+                0x000000001ffff1be                currentState
  .bss.returnEvent
-                0x000000001ffff1ba        0x1 ./source/stateFunctions.o
-                0x000000001ffff1ba                returnEvent
+                0x000000001ffff1bf        0x1 ./source/stateFunctions.o
+                0x000000001ffff1bf                returnEvent
  .bss.delayCompleted
-                0x000000001ffff1bb        0x1 ./source/stateFunctions.o
-                0x000000001ffff1bb                delayCompleted
+                0x000000001ffff1c0        0x1 ./source/stateFunctions.o
+                0x000000001ffff1c0                delayCompleted
  *(SORT_BY_ALIGNMENT(COMMON))
-                0x000000001ffff1bc                . = ALIGN (0x4)
-                0x000000001ffff1bc                _ebss = .
+                0x000000001ffff1c4                . = ALIGN (0x4)
+ *fill*         0x000000001ffff1c1        0x3 
+                0x000000001ffff1c4                _ebss = .
                 [!provide]                        PROVIDE (end = .)
 
-.noinit         0x000000001ffff1bc        0x0 load address 0x0000000000003d9c
-                0x000000001ffff1bc                . = ALIGN (0x4)
-                0x000000001ffff1bc                _noinit = .
+.noinit         0x000000001ffff1c4        0x0 load address 0x0000000000003c3c
+                0x000000001ffff1c4                . = ALIGN (0x4)
+                0x000000001ffff1c4                _noinit = .
  *(SORT_BY_ALIGNMENT(.noinit*))
-                0x000000001ffff1bc                . = ALIGN (0x4)
-                0x000000001ffff1bc                _end_noinit = .
+                0x000000001ffff1c4                . = ALIGN (0x4)
+                0x000000001ffff1c4                _end_noinit = .
                 0x0000000000000400                _HeapSize = 0x400
 
-.heap           0x000000001ffff1bc      0x400 load address 0x0000000000003d9c
-                0x000000001ffff1bc                _pvHeapStart = .
-                0x000000001ffff5bc                . = (. + _HeapSize)
- *fill*         0x000000001ffff1bc      0x400 
-                0x000000001ffff5bc                . = ALIGN (0x4)
-                0x000000001ffff5bc                _pvHeapLimit = .
+.heap           0x000000001ffff1c4      0x400 load address 0x0000000000003c3c
+                0x000000001ffff1c4                _pvHeapStart = .
+                0x000000001ffff5c4                . = (. + _HeapSize)
+ *fill*         0x000000001ffff1c4      0x400 
+                0x000000001ffff5c4                . = ALIGN (0x4)
+                0x000000001ffff5c4                _pvHeapLimit = .
                 0x0000000000000400                _StackSize = 0x400
 
 .heap2stackfill
-                0x000000001ffff5bc      0x400 load address 0x0000000000003d9c
-                0x000000001ffff9bc                . = (. + _StackSize)
- *fill*         0x000000001ffff5bc      0x400 
+                0x000000001ffff5c4      0x400 load address 0x0000000000003c3c
+                0x000000001ffff9c4                . = (. + _StackSize)
+ *fill*         0x000000001ffff5c4      0x400 
 
 .stack          0x0000000020002c00        0x0
                 0x0000000020002c00                _vStackBase = .
                 0x0000000020002c00                . = ALIGN (0x4)
                 0x0000000020003000                _vStackTop = (. + _StackSize)
                 0x0000000000000000                _image_start = LOADADDR (.text)
-                0x0000000000003d9c                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x0000000000003d9c                _image_size = (_image_end - _image_start)
+                0x0000000000003c3c                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x0000000000003c3c                _image_size = (_image_end - _image_start)
 OUTPUT(PES Project 4.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x30d5
+.debug_info     0x0000000000000000     0x312b
  .debug_info    0x0000000000000000      0x4f9 ./startup/startup_mkl25z4.o
- .debug_info    0x00000000000004f9      0x450 ./source/PES Project 4.o
- .debug_info    0x0000000000000949      0x2aa ./source/System.o
- .debug_info    0x0000000000000bf3      0x6bf ./source/i2c.o
- .debug_info    0x00000000000012b2      0x517 ./source/ledControl.o
- .debug_info    0x00000000000017c9      0x381 ./source/loggerFunctions.o
- .debug_info    0x0000000000001b4a       0x53 ./source/mtb.o
- .debug_info    0x0000000000001b9d       0x3c ./source/semihost_hardfault.o
- .debug_info    0x0000000000001bd9      0xc9d ./source/stateFunctions.o
- .debug_info    0x0000000000002876      0x426 ./source/unitTest.o
- .debug_info    0x0000000000002c9c      0x439 ./CMSIS/system_MKL25Z4.o
+ .debug_info    0x00000000000004f9      0x45c ./source/PES Project 4.o
+ .debug_info    0x0000000000000955      0x2aa ./source/System.o
+ .debug_info    0x0000000000000bff      0x6bf ./source/i2c.o
+ .debug_info    0x00000000000012be      0x517 ./source/ledControl.o
+ .debug_info    0x00000000000017d5      0x390 ./source/loggerFunctions.o
+ .debug_info    0x0000000000001b65       0x53 ./source/mtb.o
+ .debug_info    0x0000000000001bb8       0x3c ./source/semihost_hardfault.o
+ .debug_info    0x0000000000001bf4      0xccc ./source/stateFunctions.o
+ .debug_info    0x00000000000028c0      0x432 ./source/unitTest.o
+ .debug_info    0x0000000000002cf2      0x439 ./CMSIS/system_MKL25Z4.o
 
-.debug_abbrev   0x0000000000000000      0xdc5
+.debug_abbrev   0x0000000000000000      0xdc7
  .debug_abbrev  0x0000000000000000      0x17e ./startup/startup_mkl25z4.o
  .debug_abbrev  0x000000000000017e      0x11c ./source/PES Project 4.o
  .debug_abbrev  0x000000000000029a      0x10c ./source/System.o
@@ -1296,9 +1304,9 @@ OUTPUT(PES Project 4.axf elf32-littlearm)
  .debug_abbrev  0x00000000000006ce      0x14d ./source/loggerFunctions.o
  .debug_abbrev  0x000000000000081b       0x46 ./source/mtb.o
  .debug_abbrev  0x0000000000000861       0x31 ./source/semihost_hardfault.o
- .debug_abbrev  0x0000000000000892      0x28a ./source/stateFunctions.o
- .debug_abbrev  0x0000000000000b1c      0x153 ./source/unitTest.o
- .debug_abbrev  0x0000000000000c6f      0x156 ./CMSIS/system_MKL25Z4.o
+ .debug_abbrev  0x0000000000000892      0x28c ./source/stateFunctions.o
+ .debug_abbrev  0x0000000000000b1e      0x153 ./source/unitTest.o
+ .debug_abbrev  0x0000000000000c71      0x156 ./CMSIS/system_MKL25Z4.o
 
 .debug_aranges  0x0000000000000000      0x3a0
  .debug_aranges
@@ -1379,41 +1387,41 @@ OUTPUT(PES Project 4.axf elf32-littlearm)
  .debug_macro   0x0000000000008780      0x111 ./source/unitTest.o
  .debug_macro   0x0000000000008891       0x94 ./CMSIS/system_MKL25Z4.o
 
-.debug_line     0x0000000000000000     0x212b
+.debug_line     0x0000000000000000     0x2107
  .debug_line    0x0000000000000000      0x249 ./startup/startup_mkl25z4.o
- .debug_line    0x0000000000000249      0x352 ./source/PES Project 4.o
- .debug_line    0x000000000000059b      0x373 ./source/System.o
- .debug_line    0x000000000000090e      0x480 ./source/i2c.o
- .debug_line    0x0000000000000d8e      0x2e9 ./source/ledControl.o
- .debug_line    0x0000000000001077      0x2cc ./source/loggerFunctions.o
- .debug_line    0x0000000000001343       0xd9 ./source/mtb.o
- .debug_line    0x000000000000141c       0x5a ./source/semihost_hardfault.o
- .debug_line    0x0000000000001476      0x5b6 ./source/stateFunctions.o
- .debug_line    0x0000000000001a2c      0x3b0 ./source/unitTest.o
- .debug_line    0x0000000000001ddc      0x34f ./CMSIS/system_MKL25Z4.o
+ .debug_line    0x0000000000000249      0x34a ./source/PES Project 4.o
+ .debug_line    0x0000000000000593      0x373 ./source/System.o
+ .debug_line    0x0000000000000906      0x47f ./source/i2c.o
+ .debug_line    0x0000000000000d85      0x2e0 ./source/ledControl.o
+ .debug_line    0x0000000000001065      0x2cc ./source/loggerFunctions.o
+ .debug_line    0x0000000000001331       0xd9 ./source/mtb.o
+ .debug_line    0x000000000000140a       0x5a ./source/semihost_hardfault.o
+ .debug_line    0x0000000000001464      0x5a4 ./source/stateFunctions.o
+ .debug_line    0x0000000000001a08      0x3b0 ./source/unitTest.o
+ .debug_line    0x0000000000001db8      0x34f ./CMSIS/system_MKL25Z4.o
 
-.debug_str      0x0000000000000000    0x32c7e
+.debug_str      0x0000000000000000    0x32c90
  .debug_str     0x0000000000000000     0x3178 ./startup/startup_mkl25z4.o
                                        0x31ad (size before relaxing)
- .debug_str     0x0000000000003178    0x27713 ./source/PES Project 4.o
-                                      0x2a6a7 (size before relaxing)
- .debug_str     0x000000000002a88b     0x787a ./source/System.o
+ .debug_str     0x0000000000003178    0x2771e ./source/PES Project 4.o
+                                      0x2a6b2 (size before relaxing)
+ .debug_str     0x000000000002a896     0x787a ./source/System.o
                                       0x309d7 (size before relaxing)
- .debug_str     0x0000000000032105      0x15a ./source/i2c.o
+ .debug_str     0x0000000000032110      0x15a ./source/i2c.o
                                       0x29470 (size before relaxing)
- .debug_str     0x000000000003225f       0x6c ./source/ledControl.o
+ .debug_str     0x000000000003226a       0x6c ./source/ledControl.o
                                       0x28ffe (size before relaxing)
- .debug_str     0x00000000000322cb       0xb1 ./source/loggerFunctions.o
-                                       0x49bc (size before relaxing)
- .debug_str     0x000000000003237c      0x532 ./source/mtb.o
+ .debug_str     0x00000000000322d6       0xb8 ./source/loggerFunctions.o
+                                       0x49c3 (size before relaxing)
+ .debug_str     0x000000000003238e      0x532 ./source/mtb.o
                                        0x32c8 (size before relaxing)
- .debug_str     0x00000000000328ae       0x1f ./source/semihost_hardfault.o
+ .debug_str     0x00000000000328c0       0x1f ./source/semihost_hardfault.o
                                        0x2db5 (size before relaxing)
- .debug_str     0x00000000000328cd      0x314 ./source/stateFunctions.o
-                                      0x2aab0 (size before relaxing)
- .debug_str     0x0000000000032be1       0x39 ./source/unitTest.o
-                                      0x2a320 (size before relaxing)
- .debug_str     0x0000000000032c1a       0x64 ./CMSIS/system_MKL25Z4.o
+ .debug_str     0x00000000000328df      0x314 ./source/stateFunctions.o
+                                      0x2aabb (size before relaxing)
+ .debug_str     0x0000000000032bf3       0x39 ./source/unitTest.o
+                                      0x2a32b (size before relaxing)
+ .debug_str     0x0000000000032c2c       0x64 ./CMSIS/system_MKL25Z4.o
                                       0x2fc2d (size before relaxing)
 
 .comment        0x0000000000000000       0x75
@@ -1784,6 +1792,7 @@ _vsprintf                                         /Applications/MCUXpressoIDE_11
 alertAddressed                                    ./source/stateFunctions.o
                                                   ./source/PES Project 4.o
 average                                           ./source/stateFunctions.o
+averageDiv                                        ./source/stateFunctions.o
 avgWaitState                                      ./source/stateFunctions.o
                                                   ./source/unitTest.o
                                                   ./source/PES Project 4.o
@@ -1843,6 +1852,7 @@ log_message                                       ./source/loggerFunctions.o
                                                   ./source/i2c.o
                                                   ./source/PES Project 4.o
 log_message_int                                   ./source/loggerFunctions.o
+                                                  ./source/stateFunctions.o
 log_status                                        ./source/loggerFunctions.o
 log_string                                        ./source/loggerFunctions.o
 loggerEnable                                      ./source/stateFunctions.o

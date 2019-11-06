@@ -96,7 +96,7 @@ void log_message(enum loggerMode logLevel, const char *functionName, char *messa
 }
 
 //Print an integer in a particular format based on build config
-void log_message_int(enum loggerMode logLevel, const char *functionName, int message)
+void log_message_int(enum loggerMode logLevel, const char *functionName, char* message, int number)
 {
 	if(loggerEnable){
 #ifdef debug
@@ -119,7 +119,7 @@ void log_message_int(enum loggerMode logLevel, const char *functionName, int mes
 		//log if normal build config is selected
 		if (logLevel == NORMAL){
 			printf("NORMAL: ");
-			printf("%s: %d\n", functionName, message);
+			printf("%s: %s %d\n", functionName, message, number);
 		}
 #endif
 		//

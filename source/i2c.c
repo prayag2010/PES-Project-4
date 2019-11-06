@@ -59,7 +59,7 @@ void start()
 //		printf("Temperature sensor detected\n");
 		log_message(DEBUG, __func__, "Temperature Sensor detected");
 		log_message(TEST, __func__, "Temperature Sensor detected");
-		log_message(NORMAL, __func__, "Temperature Sensor detected");
+//		log_message(NORMAL, __func__, "Temperature Sensor detected");
 		I2C1->S |= I2C_S_RXAK_MASK;
 	}
 	else{

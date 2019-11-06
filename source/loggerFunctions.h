@@ -115,6 +115,6 @@ void log_message(enum loggerMode logLevel, const char *functionName, char *messa
  *
  * @return void
  */
-void log_message_int(enum loggerMode logLevel, const char *functionName, int message);
+void log_message_int(enum loggerMode logLevel, const char *functionName, char* message, int number);
 
 #endif /* LOGGERFUNCTIONS_H_ */

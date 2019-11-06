@@ -28,7 +28,7 @@ void Init_RGB_LEDs(void)
 	PTB->PDDR |= MASK(RED_LED_POS) | MASK(GREEN_LED_POS);
 	PTD->PDDR |= MASK(BLUE_LED_POS);
 	log_message(DEBUG, __func__, "Initialising LEDs");
-	log_message(TEST, __func__, "Initialising LEDs");
+//	log_message(TEST, __func__, "Initialising LEDs");
 }
 
 void ledOff()
@@ -37,8 +37,8 @@ void ledOff()
 	PTB->PSOR =MASK(GREEN_LED_POS); //Switch off GREEN
 	PTD->PSOR = MASK(BLUE_LED_POS); //Switch off BLUE
 	log_message(DEBUG, __func__, "Switching off LEDs");
-	log_message(TEST, __func__, "Switching off LEDs");
-	log_message(NORMAL, __func__, "Switching off LEDs");
+//	log_message(TEST, __func__, "Switching off LEDs");
+//	log_message(NORMAL, __func__, "Switching off LEDs");
 }
 
 void redLED()
@@ -46,8 +46,8 @@ void redLED()
 	ledOff();
 	PTB->PCOR = MASK(RED_LED_POS); //Switch on RED
 	log_message(DEBUG, __func__, "Turning on Red LED");
-	log_message(TEST, __func__, "Turning on Red LED");
-	log_message(NORMAL, __func__, "Turning on Red LED");
+//	log_message(TEST, __func__, "Turning on Red LED");
+//	log_message(NORMAL, __func__, "Turning on Red LED");
 }
 
 void greenLED()
@@ -55,8 +55,8 @@ void greenLED()
 	ledOff();
 	PTB->PCOR = MASK(GREEN_LED_POS); //Switch on GREEN
 	log_message(DEBUG, __func__, "Turning on Green LED");
-	log_message(TEST, __func__, "Turning on Green LED");
-	log_message(NORMAL, __func__, "Turning on Green LED");
+//	log_message(TEST, __func__, "Turning on Green LED");
+//	log_message(NORMAL, __func__, "Turning on Green LED");
 }
 
 void blueLED()
@@ -64,6 +64,6 @@ void blueLED()
 	ledOff();
 	PTD->PCOR = MASK(BLUE_LED_POS); //Switch on BLUE
 	log_message(DEBUG, __func__, "Turning on Blue LED");
-	log_message(TEST, __func__, "Turning on Blue LED");
-	log_message(NORMAL, __func__, "Turning on Blue LED");
+//	log_message(TEST, __func__, "Turning on Blue LED");
+//	log_message(NORMAL, __func__, "Turning on Blue LED");
 }

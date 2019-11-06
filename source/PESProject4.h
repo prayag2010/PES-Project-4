@@ -167,6 +167,8 @@ extern enum eventCodes returnEvent;
 extern int average;
 //The sum of the temperatures
 extern int tempSum;
+//Average denominator
+extern int averageDiv;
 //The read temperature from the sensor
 extern uint16_t tempR;
 

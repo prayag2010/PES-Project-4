@@ -28,7 +28,7 @@ enum eventCodes (* state[])(void) = {tempReadState, tempAlertState, avgWaitState
 //Check how manu timers timeout has happened
 int timeoutCounter = 0;
 //Check if state or table based machine is active
-bool stateTableActivated = true;
+bool stateTableActivated = false;
 
 
 //The state table, contains which state to enter next depending on the
@@ -51,6 +51,8 @@ enum eventCodes returnEvent;
 int average = 0;
 //Sum of temp
 int tempSum = 0;
+//Average denom
+int averageDiv = 0;
 //The temperature
 uint16_t tempR = 0;
 
@@ -90,7 +92,7 @@ enum eventCodes tempReadState(void)
 {
     UCUNIT_Tracepoint(0); /* mark trace point */
 
-	log_message(0, __func__, "Entered Temperature reading state");
+	log_message(DEBUG, __func__, "Entered Temperature reading state");
 
 	//Enable port D interrupt for alert
 	PORTD->PCR[5] |= PORT_PCR_ISF_MASK;
@@ -111,11 +113,15 @@ enum eventCodes tempReadState(void)
 	if(tempR == 0xFFFF)
 		return disconnectEvent;
 
+//	log_message_int(NORMAL, __func__, "Temperature: ", tempR);
+
 	if (!(negative))
-		printf("tempReadState %d\n", tempR);
+//		printf("tempReadState %d\n", tempR);
+		log_message_int(NORMAL, __func__, "Temperature: ", tempR);
 	else
 	{
-		printf("tempReadState -%d\n", tempR);
+//		printf("tempReadState -%d\n", tempR);
+		log_message_int(NORMAL, __func__, "Temperature: -", tempR);
 		negative = false;
 	}
 
@@ -125,7 +131,7 @@ enum eventCodes tempReadState(void)
 //		printf("ALERT DETECTED\n");
 		log_message(DEBUG, __func__, "Alert Detected");
 		log_message(TEST, __func__, "Alert Detected");
-		log_message(NORMAL, __func__, "Alert Detected");
+//		log_message(NORMAL, __func__, "Alert Detected");
 		return alertEvent;
 	}
 
@@ -156,7 +162,7 @@ enum eventCodes tempAlertState(void)
 //		printf("ALERT DETECTED\n");
 		log_message(DEBUG, __func__, "Alert Detected");
 		log_message(TEST, __func__, "Alert Detected");
-		log_message(NORMAL, __func__, "Alert Detected");
+//		log_message(NORMAL, __func__, "Alert Detected");
 	}
 
 	return completeEvent;
@@ -189,21 +195,24 @@ enum eventCodes avgWaitState(void)
 		tempSum += (int)tempR;
 
 	//calc average
-	average = tempSum / (timeoutCounter + 1);
-	printf("Average: %d\n", average);
+	averageDiv++;
+	average = tempSum / (averageDiv);
+//	printf("Average: %d\n", average);
+
+	log_message_int(NORMAL, __func__, "Average: ", average);
 
 	//wait for delay
 	while(!delayCompleted);
-	printf("avgWaitState\n");
+//	printf("avgWaitState\n");
 	timeoutCounter++;
-	printf("Counter: %d\n", timeoutCounter);
+//	printf("Counter: %d\n", timeoutCounter);
 
 
 	//If counter runs 4th time, switch state machine
 	if (timeoutCounter >= 3)
 	{
-		tempSum = 0;
-		average = 0;
+//		tempSum = 0;
+//		average = 0;
 //		printf("Switched to a different state machine\n");
 		log_message(DEBUG, __func__, "Switched to a different state machine");
 		timeoutCounter = 0;
@@ -242,7 +251,7 @@ enum eventCodes errorState(void)
 //	printf("State machine return value error, going back to getTemp state\n");
 	log_message(DEBUG, __func__, "State machine return value error, going back to getTemp state");
 	log_message(TEST, __func__, "State machine return value error, going back to getTemp state");
-	log_message(NORMAL, __func__, "State machine return value error, going back to getTemp state");
+//	log_message(NORMAL, __func__, "State machine return value error, going back to getTemp state");
 	//go back to average wait
 	return completeEvent;
 }
@@ -303,8 +312,8 @@ void PORTD_IRQHandler(void)
 	//disable the interrupt
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
 
-	printf("Entered port interrupt, disabling IRQ\n");
-	printf("ALERT ALERT ALERT ALERT ALERT ALERT\n");
+//	printf("Entered port interrupt, disabling IRQ\n");
+//	printf("ALERT ALERT ALERT ALERT ALERT ALERT\n");
 	//set user mask
 	alertAddressed = false;
 
@@ -319,7 +328,7 @@ void SysTick_Handler(void)
 	{
 		//reset counter
 		sysTickCounter = 0;
-		printf("SYSTICK, 15 seconds completed\n");
+		log_message(DEBUG, __func__, "Systick IRQ - 15 sec completed");
 		//set flags
 		delayCompleted = true;
 	}
