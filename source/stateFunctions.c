@@ -79,8 +79,6 @@ void endProgram(void)
 	//turn the red LED on
 	ledOff();
 	redLED();
-//	printf("Temperature sensor error\n");
-//	printf("Ending Program\n");
 	log_message(DEBUG, __func__, "Temperature sensor error, Ending Program");
 	log_message(TEST, __func__, "Temperature sensor error, Ending Program");
 	log_message(NORMAL, __func__, "Temperature sensor error, Ending Program");
@@ -113,25 +111,19 @@ enum eventCodes tempReadState(void)
 	if(tempR == 0xFFFF)
 		return disconnectEvent;
 
-//	log_message_int(NORMAL, __func__, "Temperature: ", tempR);
 
 	if (!(negative))
-//		printf("tempReadState %d\n", tempR);
 		log_message_int(NORMAL, __func__, "Temperature: ", tempR);
 	else
 	{
-//		printf("tempReadState -%d\n", tempR);
 		log_message_int(NORMAL, __func__, "Temperature: -", tempR);
 		negative = false;
 	}
 
 	if(!alertAddressed)
 	{
-		//		alertAddressed = true;
-//		printf("ALERT DETECTED\n");
 		log_message(DEBUG, __func__, "Alert Detected");
 		log_message(TEST, __func__, "Alert Detected");
-//		log_message(NORMAL, __func__, "Alert Detected");
 		return alertEvent;
 	}
 
@@ -154,15 +146,12 @@ enum eventCodes tempAlertState(void)
 	if(read_temp() == 0xFFFF)
 		return disconnectEvent;
 
-//	printf("tempAlertState\n");
 
 	if(!alertAddressed)
 	{
 		alertAddressed = true;
-//		printf("ALERT DETECTED\n");
 		log_message(DEBUG, __func__, "Alert Detected");
 		log_message(TEST, __func__, "Alert Detected");
-//		log_message(NORMAL, __func__, "Alert Detected");
 	}
 
 	return completeEvent;
@@ -173,7 +162,6 @@ enum eventCodes avgWaitState(void)
     UCUNIT_Tracepoint(2); /* mark trace point */
 
 	log_message(DEBUG, __func__, "Entered Average Wait State, disabling PORTD IRQ");
-//	printf("Entered avgWaitState, disabling PORTD IRQ\n");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
 
 	ledOff();
@@ -197,23 +185,17 @@ enum eventCodes avgWaitState(void)
 	//calc average
 	averageDiv++;
 	average = tempSum / (averageDiv);
-//	printf("Average: %d\n", average);
 
 	log_message_int(NORMAL, __func__, "Average: ", average);
 
 	//wait for delay
 	while(!delayCompleted);
-//	printf("avgWaitState\n");
 	timeoutCounter++;
-//	printf("Counter: %d\n", timeoutCounter);
 
 
 	//If counter runs 4th time, switch state machine
 	if (timeoutCounter >= 3)
 	{
-//		tempSum = 0;
-//		average = 0;
-//		printf("Switched to a different state machine\n");
 		log_message(DEBUG, __func__, "Switched to a different state machine");
 		timeoutCounter = 0;
 		currentState = tempRead;
@@ -247,11 +229,8 @@ enum eventCodes errorState(void)
 	//disable port D interrupt
 	log_message(DEBUG, __func__, "Entered Error state");
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
-//	printf("errorState\n");
-//	printf("State machine return value error, going back to getTemp state\n");
 	log_message(DEBUG, __func__, "State machine return value error, going back to getTemp state");
 	log_message(TEST, __func__, "State machine return value error, going back to getTemp state");
-//	log_message(NORMAL, __func__, "State machine return value error, going back to getTemp state");
 	//go back to average wait
 	return completeEvent;
 }
@@ -312,8 +291,6 @@ void PORTD_IRQHandler(void)
 	//disable the interrupt
 	NVIC->ICER[0] |= (1 << PORTD_IRQn);
 
-//	printf("Entered port interrupt, disabling IRQ\n");
-//	printf("ALERT ALERT ALERT ALERT ALERT ALERT\n");
 	//set user mask
 	alertAddressed = false;
 

@@ -56,50 +56,19 @@ void start()
 	if((I2C1->S & I2C_S_RXAK_MASK) == 0)           //Check if slave received a byte
 	{
 		postCheck = true;
-//		printf("Temperature sensor detected\n");
 		log_message(DEBUG, __func__, "Temperature Sensor detected");
 		log_message(TEST, __func__, "Temperature Sensor detected");
-//		log_message(NORMAL, __func__, "Temperature Sensor detected");
 		I2C1->S |= I2C_S_RXAK_MASK;
 	}
 	else{
-//		printf("No device found\n");
 		log_message(DEBUG, __func__, "No device found");
 		log_message(TEST, __func__, "No device found");
 		log_message(NORMAL, __func__, "No device found");
 		endProgram();
 	}
 
-	//		disconnect();
 
 	if(!setupOnce){
-		//		RESTART;
-		//		DATA(TMP102_WRITE);   //Transmit first byte
-		//		WAIT;
-		//		DATA(0x03);  //Send pointer register address of Temperature
-		//		WAIT;
-		//		//this 00 00
-		//		DATA(0x00);  //Send MSB of THigh
-		//		WAIT;
-		//
-		//		DATA(0x00);  //Send LSB of THigh
-		//		WAIT;
-		//
-		//		for(int i = 0; i < 10000; i++);
-		//
-		//		RESTART;
-		//		DATA(TMP102_WRITE);   //Transmit first byte
-		//		WAIT;
-		//		DATA(0x03);  //Send pointer register address of Temperature
-		//		WAIT;
-		//		//this 00 00
-		//		DATA(0x1C);  //Send MSB of THigh
-		//		WAIT;
-		//
-		//		DATA(0x50);  //Send LSB of THigh
-		//		WAIT;
-		//	}
-
 
 		RESTART;
 		DATA(TMP102_WRITE);   //Transmit first byte
@@ -132,18 +101,6 @@ void start()
 		WAIT;
 		log_message(DEBUG, __func__, "THIGH registers initialised");
 		log_message(TEST, __func__, "THIGH registers initialised");
-		//Configuration
-		//		RESTART;
-		//		DATA(TMP102_WRITE);   //Transmit first byte
-		//		WAIT;
-		//		DATA(0x01);  //Send pointer register address of config
-		//		WAIT;
-		//
-		//		DATA(0x62);  //config interrupt mode
-		//		WAIT;
-		//
-		//		DATA(0xA0);  //Send
-		//		WAIT;
 
 		setupOnce = true;
 	}
@@ -188,22 +145,16 @@ uint16_t read_temp()
 	if((MSB & 0x80) == 0)
 	{
 		temp_read = (MSB << 4) | ((LSB >> 4) & 0x0F);  //Convert into 12 bit format
-//		printf("%x\n", temp_read);
-//		printf("The temperature is : %d\n", temp_read/16);
 	}
 	else
 	{
 		negative = true;
-//		printf("Negative\n");
 		twos_complement = (MSB << 4) | ((LSB >> 4) & 0x0F);  //Convert into 12 bit format
 		temp_read = ((~twos_complement) & 0x0FF)  +1;  //Find twos complement
-//		printf("%x\n", temp_read);
-//		printf("The temperature is : -%d\n", (temp_read)/16);
 	}
 
 	if( (temp_read/16) < (-45) || (temp_read/16) > 125) //Check if temperature is out of range of sensor
 	{
-//		printf("Error in reading temp, function %s", __func__);
 		log_message(DEBUG, __func__, "Error in reading temp");
 		log_message(TEST, __func__, "Error in reading temp");
 		log_message(NORMAL, __func__, "Error in reading temp");

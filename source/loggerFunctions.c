@@ -78,19 +78,6 @@ void log_message(enum loggerMode logLevel, const char *functionName, char *messa
 			printf("%s: %s\n", functionName, message);
 		}
 #endif
-		//
-		//		if(logLevel == 0){
-		//			printf("DEBUG: ");
-		//			printf("%s: %s\n", functionName, message);
-		//		}
-		//		else if (logLevel == 1){
-		//			printf("TEST: ");
-		//			printf("%s: %s\n", functionName, message);
-		//		}
-		//		else if (logLevel == 2){
-		//			printf("NORMAL: ");
-		//			printf("%s: %s\n", functionName, message);
-		//		}
 
 	}
 }
@@ -122,19 +109,6 @@ void log_message_int(enum loggerMode logLevel, const char *functionName, char* m
 			printf("%s: %s %d\n", functionName, message, number);
 		}
 #endif
-		//
-		//		if(logLevel == 0){
-		//			printf("DEBUG: ");
-		//			printf("%s: %s\n", functionName, message);
-		//		}
-		//		else if (logLevel == 1){
-		//			printf("TEST: ");
-		//			printf("%s: %s\n", functionName, message);
-		//		}
-		//		else if (logLevel == 2){
-		//			printf("NORMAL: ");
-		//			printf("%s: %s\n", functionName, message);
-		//		}
 
 	}
 }

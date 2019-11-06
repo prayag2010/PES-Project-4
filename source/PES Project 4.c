@@ -26,10 +26,6 @@
 
 //standard IO header for communication
 #include <stdio.h>
-//#include "board.h"
-//#include "pin_mux.h"
-//#include "clock_config.h"
-
 //Logger messages
 #include "loggerFunctions.h"
 
@@ -84,11 +80,8 @@ int main(void)
 		//If the table based state machine is active
 		if (stateTableActivated)
 		{
-//			printf("IN TABLE BASED\n");
 			//Log
 			log_message(DEBUG, __func__, "IN TABLE BASED");
-//			log_message(TEST, __func__, "IN TABLE BASED");
-//			log_message(NORMAL, __func__, "IN TABLE BASED");
 
 			//Load the new state
 			stateFunction = state[currentState];
@@ -103,11 +96,7 @@ int main(void)
 		//If the state based state machine is active
 		else
 		{
-//			printf("IN STATE BASED\n");
 			log_message(DEBUG, __func__, "IN STATE BASED");
-//			log_message(TEST, __func__, "IN STATE BASED");
-//			log_message(NORMAL, __func__, "IN STATE BASED");
-//			printf("Current state: %d\n", currentState);
 			switch (currentState)
 			{
 			case tempRead:
@@ -126,7 +115,6 @@ int main(void)
 				if(!alertAddressed)
 				{
 					alertAddressed = true;
-//					printf("ALERT DETECTED\n");
 					//set next state
 					currentState = tempAlert;
 					break;

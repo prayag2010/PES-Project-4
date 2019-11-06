@@ -148,10 +148,6 @@ extern bool stateTableActivated;
 //The state table declaration
 struct stateMachineSkeleton {
     enum stateCodes onEventArray[5];
-    // enum stateCodes onTimeoutEventState;
-    // enum stateCodes onCompleteEventState;
-    // enum stateCodes onAlertEventState;
-    // enum stateCodes onDisconnectEventState;
 };
 
 //timeoutEvent, completeEvent, alertEvent, disconnectEvent, errorEvent

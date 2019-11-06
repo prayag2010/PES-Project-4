@@ -61,32 +61,27 @@ void unitTest(void)
 
 	//Check the tracepoint coverage in tempRead state
 	UCUNIT_WriteString("Checking the tracepoint in tempRead state\n");
-//	UCUNIT_ResetTracepointCoverage(); /* start tracking */
 	tempReadState();
 	UCUNIT_CheckTracepointCoverage(0);
 
 	//Check the tracepoint coverage in Alert state
 	UCUNIT_WriteString("Checking the tracepoint in Alert state\n");
-//	UCUNIT_ResetTracepointCoverage(); /* start tracking */
 	tempAlertState();
 	UCUNIT_CheckTracepointCoverage(1);
 
 	//Check the tracepoint coverage in avgWaitState state
 	UCUNIT_WriteString("Checking the tracepoint in avgWaitState state\n");
-//	UCUNIT_ResetTracepointCoverage(); /* start tracking */
 	avgWaitState();
 	UCUNIT_CheckTracepointCoverage(2);
 
 //	//Check the tracepoint coverage in disconnected state
 	UCUNIT_WriteString("Checking the tracepoint in disconnected state\n");
-//	UCUNIT_ResetTracepointCoverage(); /* start tracking */
 	disconnectState();
 	UCUNIT_CheckTracepointCoverage(3);
 
 	//Check the tracepoint coverage in Error state
 	UCUNIT_WriteString("Checking the tracepoint in Error state\n");
 	//main();
-//	UCUNIT_ResetTracepointCoverage(); /* start tracking */
 	errorState();
 	UCUNIT_CheckTracepointCoverage(4);
 

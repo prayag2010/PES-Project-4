@@ -1288,7 +1288,7 @@ END GROUP
                 0x0000000000002e70                _image_size = (_image_end - _image_start)
 OUTPUT(PES Project 4.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x2e81
+.debug_info     0x0000000000000000     0x2e80
  .debug_info    0x0000000000000000      0x4f9 ./startup/startup_mkl25z4.o
  .debug_info    0x00000000000004f9      0x45c ./source/PES Project 4.o
  .debug_info    0x0000000000000955      0x6bf ./source/i2c.o
@@ -1296,11 +1296,11 @@ OUTPUT(PES Project 4.axf elf32-littlearm)
  .debug_info    0x000000000000152b      0x390 ./source/loggerFunctions.o
  .debug_info    0x00000000000018bb       0x53 ./source/mtb.o
  .debug_info    0x000000000000190e       0x3c ./source/semihost_hardfault.o
- .debug_info    0x000000000000194a      0xccc ./source/stateFunctions.o
- .debug_info    0x0000000000002616      0x432 ./source/unitTest.o
- .debug_info    0x0000000000002a48      0x439 ./CMSIS/system_MKL25Z4.o
+ .debug_info    0x000000000000194a      0xccb ./source/stateFunctions.o
+ .debug_info    0x0000000000002615      0x432 ./source/unitTest.o
+ .debug_info    0x0000000000002a47      0x439 ./CMSIS/system_MKL25Z4.o
 
-.debug_abbrev   0x0000000000000000      0xcbb
+.debug_abbrev   0x0000000000000000      0xcd5
  .debug_abbrev  0x0000000000000000      0x17e ./startup/startup_mkl25z4.o
  .debug_abbrev  0x000000000000017e      0x11c ./source/PES Project 4.o
  .debug_abbrev  0x000000000000029a      0x1c7 ./source/i2c.o
@@ -1308,9 +1308,9 @@ OUTPUT(PES Project 4.axf elf32-littlearm)
  .debug_abbrev  0x00000000000005c2      0x14d ./source/loggerFunctions.o
  .debug_abbrev  0x000000000000070f       0x46 ./source/mtb.o
  .debug_abbrev  0x0000000000000755       0x31 ./source/semihost_hardfault.o
- .debug_abbrev  0x0000000000000786      0x28c ./source/stateFunctions.o
- .debug_abbrev  0x0000000000000a12      0x153 ./source/unitTest.o
- .debug_abbrev  0x0000000000000b65      0x156 ./CMSIS/system_MKL25Z4.o
+ .debug_abbrev  0x0000000000000786      0x2a6 ./source/stateFunctions.o
+ .debug_abbrev  0x0000000000000a2c      0x153 ./source/unitTest.o
+ .debug_abbrev  0x0000000000000b7f      0x156 ./CMSIS/system_MKL25Z4.o
 
 .debug_aranges  0x0000000000000000      0x350
  .debug_aranges
@@ -1377,17 +1377,17 @@ OUTPUT(PES Project 4.axf elf32-littlearm)
  .debug_macro   0x0000000000007028      0x111 ./source/unitTest.o
  .debug_macro   0x0000000000007139       0x94 ./CMSIS/system_MKL25Z4.o
 
-.debug_line     0x0000000000000000     0x1d90
+.debug_line     0x0000000000000000     0x1d8c
  .debug_line    0x0000000000000000      0x249 ./startup/startup_mkl25z4.o
  .debug_line    0x0000000000000249      0x349 ./source/PES Project 4.o
- .debug_line    0x0000000000000592      0x47f ./source/i2c.o
- .debug_line    0x0000000000000a11      0x2e0 ./source/ledControl.o
- .debug_line    0x0000000000000cf1      0x2c8 ./source/loggerFunctions.o
- .debug_line    0x0000000000000fb9       0xd9 ./source/mtb.o
- .debug_line    0x0000000000001092       0x5a ./source/semihost_hardfault.o
- .debug_line    0x00000000000010ec      0x5a5 ./source/stateFunctions.o
- .debug_line    0x0000000000001691      0x3b0 ./source/unitTest.o
- .debug_line    0x0000000000001a41      0x34f ./CMSIS/system_MKL25Z4.o
+ .debug_line    0x0000000000000592      0x47b ./source/i2c.o
+ .debug_line    0x0000000000000a0d      0x2e0 ./source/ledControl.o
+ .debug_line    0x0000000000000ced      0x2c8 ./source/loggerFunctions.o
+ .debug_line    0x0000000000000fb5       0xd9 ./source/mtb.o
+ .debug_line    0x000000000000108e       0x5a ./source/semihost_hardfault.o
+ .debug_line    0x00000000000010e8      0x5a5 ./source/stateFunctions.o
+ .debug_line    0x000000000000168d      0x3b0 ./source/unitTest.o
+ .debug_line    0x0000000000001a3d      0x34f ./CMSIS/system_MKL25Z4.o
 
 .debug_str      0x0000000000000000    0x321e8
  .debug_str     0x0000000000000000     0x317a ./startup/startup_mkl25z4.o

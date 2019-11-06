@@ -45,24 +45,6 @@ void smallDelay(void);
  */
 void endProgram(void);
 
-//enum eventCodes tempReadState(void);
-//
-//enum eventCodes tempAlertState(void);
-//
-//enum eventCodes avgWaitState(void);
-//
-//enum eventCodes disconnectState(void);
-//
-//enum eventCodes errorState(void);
-
-//void initPortD(void);
-
-//void resetSysTick(void);
-//
-//void startSysTick(void);
-//
-//void Init_SysTick(void);
-
 
 /*
  * @brief Port D interrupt handler
